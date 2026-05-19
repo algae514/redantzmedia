@@ -261,59 +261,109 @@
   transform-origin: center;
 }
 
-.hamburger.is-open .ham-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger.is-open .ham-line:nth-child(2) { opacity: 0; width: 0; }
-.hamburger.is-open .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.hamburger.is-open .ham-line:nth-child(1) { transform: translateY(7px) rotate(45deg); background: #C81010; }
+.hamburger.is-open .ham-line:nth-child(2) { opacity: 0; width: 0; background: #C81010; }
+.hamburger.is-open .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: #C81010; }
 
 /* =============================================
-   MOBILE NAV DRAWER
+   MOBILE NAV DRAWER  — dark premium
    ============================================= */
 .mobile-nav {
   position: fixed;
   top: 65px;
   left: 0;
   right: 0;
+  bottom: 0;
   z-index: 190;
-  background: #fff;
-  border-bottom: 3px solid #C81010;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.14);
-  padding: 1.5rem var(--px) 2rem;
-  transform: translateY(-110%);
-  opacity: 0;
-  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
-  pointer-events: none;
+  background: #0D0D0D;
+  border-top: 3px solid #C81010;
   display: none;
+  flex-direction: column;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+/* Subtle left-edge red gradient accent */
+.mobile-nav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  bottom: 0;
+  background: linear-gradient(to bottom, #C81010 0%, transparent 80%);
+  pointer-events: none;
 }
 
 .mobile-nav--open {
-  transform: translateY(0);
-  opacity: 1;
+  transform: translateX(0);
   pointer-events: auto;
 }
 
+/* Nav links container */
 .mobile-nav-links {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  margin-bottom: 1.5rem;
+  flex: 1;
+  padding: 1.2rem var(--px) 0.5rem;
 }
 
+/* Stagger items from right on open */
+.mobile-nav-links > * {
+  opacity: 0;
+  transform: translateX(50px);
+}
+.mobile-nav--open .mobile-nav-links > * {
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mobile-nav--open .mobile-nav-links > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.08s; }
+.mobile-nav--open .mobile-nav-links > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.14s; }
+.mobile-nav--open .mobile-nav-links > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.20s; }
+.mobile-nav--open .mobile-nav-links > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.26s; }
+.mobile-nav--open .mobile-nav-links > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.32s; }
+.mobile-nav--open .mobile-nav-links > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.38s; }
+.mobile-nav--open .mobile-nav-links > *:nth-child(7) { opacity: 1; transform: none; transition-delay: 0.44s; }
+
+/* Link & trigger base on dark bg */
 .mobile-nav-links .site-nav-link,
 .mobile-nav-links .site-nav-dropdown-trigger {
-  display: block;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 0.8rem 0.4rem;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: clamp(0.25rem, 4vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 0;
-  color: #0D0D0D;
+  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
+  text-decoration: none;
+  background: none;
+  transition: color 0.25s ease, padding-left 0.25s ease;
+  cursor: pointer;
 }
 
-.mobile-nav-links .site-nav-link:last-child { border-bottom: none; }
+.mobile-nav-links .site-nav-link:hover,
+.mobile-nav-links .site-nav-dropdown-trigger:hover {
+  color: #fff;
+  padding-left: 0.5rem;
+}
 
+.mobile-nav-links .site-nav-link--active { color: #C81010; }
+
+/* Services dropdown — static inline */
 .mobile-nav-links .site-nav-dropdown { position: static; }
+
+.mobile-nav-links .site-nav-dropdown-trigger {
+  justify-content: space-between;
+}
+
+.mobile-nav-links .site-nav-chevron {
+  border-top-color: rgba(255, 255, 255, 0.35);
+}
 
 .mobile-nav-links .site-nav-dropdown-panel {
   position: static;
@@ -321,45 +371,59 @@
   box-shadow: none;
   border: none;
   border-radius: 0;
-  background: rgba(200,16,16,0.04);
-  padding: 0.3rem 0 0.5rem 1rem;
-  margin-bottom: 0.4rem;
+  border-left: 2px solid #C81010;
+  background: transparent;
+  padding: 0.3rem 0 0.7rem 1.1rem;
+  margin: 0 0 0.3rem 0.3rem;
   animation: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .mobile-nav-links .site-nav-dropdown-item {
-  font-size: 0.88rem;
-  padding: 0.55rem 0.8rem;
-  color: #444;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  padding: 0.45rem 0.4rem;
+  color: rgba(255, 255, 255, 0.38);
+  text-transform: uppercase;
+  background: transparent;
+  display: block;
+  transition: color 0.2s ease, padding-left 0.2s ease;
 }
 
+.mobile-nav-links .site-nav-dropdown-item:hover {
+  color: #C81010;
+  background: transparent;
+  padding-left: 0.8rem;
+}
+
+/* CTA button */
 .mobile-cta {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.8rem;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 1.5rem var(--px) 2.5rem;
+  padding: 1.05rem 2rem;
   background: #C81010;
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 999px;
-  box-shadow: 0 6px 18px rgba(200,16,16,0.35);
-  width: 100%;
-  justify-content: center;
+  box-shadow: 0 8px 28px rgba(200, 16, 16, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.mobile-nav-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 180;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+.mobile-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(200, 16, 16, 0.55);
+  background: #a80d0d;
 }
+
+.mobile-nav-backdrop { display: none; }
 
 /* =============================================
    RESPONSIVE HEADER BREAKPOINTS
@@ -368,8 +432,7 @@
   .site-header-nav     { display: none; }
   .header-cta--desktop { display: none; }
   .hamburger           { display: flex; }
-  .mobile-nav          { display: block; }
-  .mobile-nav-backdrop { display: block; }
+  .mobile-nav          { display: flex; }
 }
 
 @media (max-width: 480px) {

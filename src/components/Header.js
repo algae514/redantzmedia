@@ -119,10 +119,6 @@ function Header() {
         </NavLink>
       </div>
 
-      {/* Backdrop */}
-      {menuOpen && (
-        <div className="mobile-nav-backdrop" onClick={() => setMenuOpen(false)} aria-hidden="true" />
-      )}
     </>
   );
 }

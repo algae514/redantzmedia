@@ -222,24 +222,159 @@
   flex-shrink: 0;
 }
 
+/* Logo image sizing */
+.site-logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
 /* =============================================
-   RESPONSIVE HEADER
+   HAMBURGER BUTTON
    ============================================= */
-@media (max-width: 900px) {
-  .site-header-inner {
-    flex-wrap: wrap;
-    row-gap: 0.6rem;
-  }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
 
-  .site-header-nav {
-    order: 3;
-    width: 100%;
-    justify-content: flex-start;
-    border-top: 1px solid rgba(0,0,0,0.06);
-    padding-top: 0.65rem;
-  }
+.hamburger:hover { background: rgba(200,16,16,0.07); }
 
-  .header-cta { margin-left: auto; }
+.ham-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #0D0D0D;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.is-open .ham-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.is-open .ham-line:nth-child(2) { opacity: 0; width: 0; }
+.hamburger.is-open .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* =============================================
+   MOBILE NAV DRAWER
+   ============================================= */
+.mobile-nav {
+  position: fixed;
+  top: 65px;
+  left: 0;
+  right: 0;
+  z-index: 190;
+  background: #fff;
+  border-bottom: 3px solid #C81010;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.14);
+  padding: 1.5rem var(--px) 2rem;
+  transform: translateY(-110%);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+  pointer-events: none;
+  display: none;
+}
+
+.mobile-nav--open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.mobile-nav-links .site-nav-link,
+.mobile-nav-links .site-nav-dropdown-trigger {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.8rem 0.4rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-radius: 0;
+  color: #0D0D0D;
+  text-transform: uppercase;
+}
+
+.mobile-nav-links .site-nav-link:last-child { border-bottom: none; }
+
+.mobile-nav-links .site-nav-dropdown { position: static; }
+
+.mobile-nav-links .site-nav-dropdown-panel {
+  position: static;
+  transform: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  background: rgba(200,16,16,0.04);
+  padding: 0.3rem 0 0.5rem 1rem;
+  margin-bottom: 0.4rem;
+  animation: none;
+}
+
+.mobile-nav-links .site-nav-dropdown-item {
+  font-size: 0.88rem;
+  padding: 0.55rem 0.8rem;
+  color: #444;
+}
+
+.mobile-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  background: #C81010;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(200,16,16,0.35);
+  width: 100%;
+  justify-content: center;
+}
+
+.mobile-nav-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* =============================================
+   RESPONSIVE HEADER BREAKPOINTS
+   ============================================= */
+@media (max-width: 860px) {
+  .site-header-nav     { display: none; }
+  .header-cta--desktop { display: none; }
+  .hamburger           { display: flex; }
+  .mobile-nav          { display: block; }
+  .mobile-nav-backdrop { display: block; }
+}
+
+@media (max-width: 480px) {
+  .site-logo-img { height: 36px; }
+  .site-header-inner { padding: 0.7rem var(--px); }
 }
 
 /* =============================================

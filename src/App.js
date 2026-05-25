@@ -13,7 +13,7 @@ function AppShell() {
 
   return (
     <div className="app-shell">
-      <Header />
+      {!isHome && <Header />}
       <main className={isHome ? 'main-full' : 'main-content'}>
         <Routes>
           <Route path="/" element={<Home />} />

@@ -5,7 +5,9 @@ function Header() {
   const { pathname } = useLocation();
   const [servicesOpen, setServicesOpen] = useState(false);
   const [menuOpen, setMenuOpen]         = useState(false);
-  const servicesRef = useRef(null);
+  const [scrolled, setScrolled]         = useState(false);
+  const servicesRef  = useRef(null);
+  const isHome       = pathname === '/';
   const servicesActive = pathname.startsWith('/wedding-quotation');
 
   /* Close everything on route change */
@@ -20,6 +22,15 @@ function Header() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
+  /* Dark header — scroll past hero on home page */
+  useEffect(() => {
+    if (!isHome) { setScrolled(false); return; }
+    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.78);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isHome, pathname]);
+
   /* Close services dropdown on outside click */
   useEffect(() => {
     function handle(e) {
@@ -30,6 +41,9 @@ function Header() {
     document.addEventListener('mousedown', handle);
     return () => document.removeEventListener('mousedown', handle);
   }, []);
+
+  const isDark   = isHome && !scrolled;
+  const logoSrc  = isDark ? '/images/logo-red.png' : '/images/logo.png';
 
   const navClass = ({ isActive }) =>
     `site-nav-link${isActive ? ' site-nav-link--active' : ''}`;
@@ -69,11 +83,11 @@ function Header() {
 
   return (
     <>
-      <header className="site-header-bar">
+      <header className={`site-header-bar${isDark ? ' site-header-bar--dark' : ''}`}>
         <div className="site-header-inner">
           {/* Logo */}
           <NavLink to="/" className="site-logo" end aria-label="RedAntz Media home">
-            <img src="/images/logo.png" alt="RedAntz Media" className="site-logo-img" />
+            <img src={logoSrc} alt="RedAntz Media" className="site-logo-img" />
           </NavLink>
 
           {/* Desktop nav */}
@@ -118,7 +132,6 @@ function Header() {
           </svg>
         </NavLink>
       </div>
-
     </>
   );
 }

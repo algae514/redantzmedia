@@ -23,6 +23,36 @@
 /* =============================================
    HEADER
    ============================================= */
+/* Dark transparent variant — home page hero */
+.site-header-bar--dark {
+  background: rgba(13, 13, 13, 0.55) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.07) !important;
+  box-shadow: none !important;
+}
+.site-header-bar--dark .site-nav-link           { color: rgba(255,255,255,0.82); }
+.site-header-bar--dark .site-nav-link:hover     { color: #fff; }
+.site-header-bar--dark .site-nav-link--active   { color: #C81010; border-bottom-color: #C81010; }
+.site-header-bar--dark .site-nav-link--static   { color: rgba(255,255,255,0.82); }
+.site-header-bar--dark .site-nav-link--static:hover { color: #fff; }
+.site-header-bar--dark .site-nav-dropdown-trigger   { color: rgba(255,255,255,0.82); }
+.site-header-bar--dark .site-nav-dropdown-trigger:hover,
+.site-header-bar--dark .site-nav-dropdown-trigger.is-open { color: #fff; }
+.site-header-bar--dark .site-nav-chevron            { border-top-color: rgba(255,255,255,0.6); }
+.site-header-bar--dark .hamburger .ham-line         { background: #ffffff; }
+.site-header-bar--dark .hamburger.is-open .ham-line { background: #C81010; }
+.site-header-bar--dark .site-nav-dropdown-panel {
+  background: rgba(13,13,13,0.95);
+  border-color: rgba(255,255,255,0.1);
+}
+.site-header-bar--dark .site-nav-dropdown-item { color: rgba(255,255,255,0.75); }
+.site-header-bar--dark .site-nav-dropdown-item:hover {
+  background: rgba(200,16,16,0.12);
+  color: #fff;
+}
+
+
 .site-header-bar {
   position: sticky;
   top: 0;

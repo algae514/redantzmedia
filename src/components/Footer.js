@@ -53,20 +53,16 @@ const SOCIALS = [
 
 const OFFICES = [
   {
-    city: 'ANDHRA PRADESH',
-    addr: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore - 560016',
+    city: 'BENGALURU',
+    addr: 'No 15, Varanasi Main Road, Tcpalya, Bengaluru – 560036',
   },
   {
     city: 'HYDERABAD',
-    addr: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore - 560016',
+    addr: 'Vaishnavi Cymbol, 3rd Floor, C Block, Financial District, Nanakramguda, Hyderabad 500032',
   },
   {
-    city: 'BENGALURU',
-    addr: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore - 560016',
-  },
-  {
-    city: 'U.S.A',
-    addr: 'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore - 560016',
+    city: 'VISAKHAPATNAM',
+    addr: '9-37-16, MIG 47, Pithapuram Colony, Maddilapalem, Visakhapatnam 530003',
   },
 ];
 

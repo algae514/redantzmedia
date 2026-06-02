@@ -60,18 +60,85 @@ function PageLoader({ onDone }) {
 }
 
 /* ─────────────────────────────────────────────
-   HERO SECTION
+   HERO SECTION  —  full-screen premium slider
 ───────────────────────────────────────────── */
+const HERO_SLIDES = [
+  {
+    img: '/images/Slide-1.png',
+    tag: 'REDANTZ STUDIOS',
+    lines: ['CAPTURING EMOTIONS.', 'PRESERVING MEMORIES.', 'TELLING YOUR STORY.'],
+  },
+  {
+    img: '/images/Slide-2.png',
+    tag: 'REDANTZ MEDIA',
+    lines: ['CREATING MOMENTS.', 'PRODUCING EXPERIENCES.', 'COMMANDING ATTENTION.'],
+  },
+  {
+    img: '/images/Slide-3.png',
+    tag: 'REDANTZ DIGITALS',
+    lines: ['BUILDING BRANDS.', 'DRIVING GROWTH.', 'CREATING IMPACT.'],
+  },
+];
+
 function HeroSection() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setActive(s => (s + 1) % HERO_SLIDES.length), 5500);
+    return () => clearInterval(t);
+  }, []);
+
+  const slide = HERO_SLIDES[active];
+
   return (
     <section className="hero-section" id="home">
-      <img
-        src="/images/whole_banner.png"
-        alt="RedAntz Media"
-        className="hero-banner-full"
-        loading="eager"
-        decoding="async"
-      />
+      {/* Slide images with Ken Burns zoom */}
+      {HERO_SLIDES.map((s, i) => (
+        <div key={s.tag} className={`hero-slide${i === active ? ' hero-slide--active' : ''}`}>
+          <img src={s.img} alt={s.tag} />
+        </div>
+      ))}
+
+      {/* Gradient overlay */}
+      <div className="hero-overlay" />
+
+      {/* Logo top-left */}
+      <div className="hero-logo">
+        <img src="/images/redantz-Logo.png" alt="RedAntz Media" />
+      </div>
+
+      {/* Animated text content — key={active} resets animations on slide change */}
+      <div className="hero-content" key={active}>
+        <p className="hero-tag">{slide.tag}</p>
+        <div className="hero-lines">
+          {slide.lines.map((line, i) => (
+            <span key={line} className={`hero-line hero-line--${i}`}>{line}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom bar: counter + dots */}
+      <div className="hero-footer">
+        <span className="hero-counter">
+          <strong>{String(active + 1).padStart(2, '0')}</strong>
+          &nbsp;/&nbsp;{String(HERO_SLIDES.length).padStart(2, '0')}
+        </span>
+        <div className="hero-dots">
+          {HERO_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              className={`hero-dot${i === active ? ' hero-dot--on' : ''}`}
+              onClick={() => setActive(i)}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Auto-advance progress bar */}
+      <div className="hero-progress-bar">
+        <div className="hero-progress-fill" key={active} />
+      </div>
     </section>
   );
 }
@@ -84,9 +151,9 @@ const DIVISIONS = [
     key: 'studios',
     brand: 'RedAntz', sub: 'Studios',
     tagline: 'Weddings & Personal Celebrations',
-    img: 'https://picsum.photos/seed/ra-wed/600/400',
+    img: 'https://picsum.photos/seed/ra-wed/700/520',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="22" height="22">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="26" height="26">
         <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
         <circle cx="12" cy="13" r="4"/>
       </svg>
@@ -98,9 +165,9 @@ const DIVISIONS = [
     key: 'media',
     brand: 'RedAntz', sub: 'Media',
     tagline: 'Events, Entertainment & Production',
-    img: 'https://picsum.photos/seed/ra-event/600/400',
+    img: 'https://picsum.photos/seed/ra-event/700/520',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="22" height="22">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="26" height="26">
         <path d="M3 11l19-9-9 19-2-8-8-2z"/>
       </svg>
     ),
@@ -111,9 +178,9 @@ const DIVISIONS = [
     key: 'digitals',
     brand: 'RedAntz', sub: 'Digitals',
     tagline: 'Branding & Digital Marketing',
-    img: 'https://picsum.photos/seed/ra-digital/600/400',
+    img: 'https://picsum.photos/seed/ra-digital/700/520',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="22" height="22">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="26" height="26">
         <line x1="18" y1="20" x2="18" y2="10"/>
         <line x1="12" y1="20" x2="12" y2="4"/>
         <line x1="6"  y1="20" x2="6"  y2="14"/>
@@ -123,6 +190,32 @@ const DIVISIONS = [
     col2: ['Content Creation', 'Reel Production', 'Creative Design', 'Performance Marketing'],
   },
 ];
+
+function DivCard({ d, visible, index }) {
+  return (
+    <div className={`div-card${visible ? ` div-card--visible div-card--d${index + 1}` : ''}`}>
+      <div className="div-card-img">
+        <img src={d.img} alt={`${d.brand} ${d.sub}`} loading="lazy" />
+      </div>
+      {/* Icon outside image so it isn't clipped */}
+      <span className="div-icon">{d.icon}</span>
+      <div className="div-card-body">
+        <p className="div-brand">{d.brand} <span className="c-red">{d.sub}</span></p>
+        <p className="div-tagline">{d.tagline}</p>
+        <div className="div-bullets">
+          <ul>{d.col1.map(b => <li key={b}>{b}</li>)}</ul>
+          <ul>{d.col2.map(b => <li key={b}>{b}</li>)}</ul>
+        </div>
+        <Link to="/contact" className="div-learn-more">
+          Learn More
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 function DivisionsSection() {
   const [ref, visible] = useReveal(0.08);
@@ -136,49 +229,16 @@ function DivisionsSection() {
           </h2>
         </div>
         <a href="https://wa.me/919819542190" className="cta-whatsapp" target="_blank" rel="noreferrer">
-          <span>LET&apos;S TALK &raquo;&raquo;&raquo;</span>
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" style={{color:'#fff'}}>
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
             <path d="M11.997 2C6.477 2 2 6.477 2 12c0 1.89.525 3.659 1.438 5.17L2 22l4.978-1.303A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.52 2 11.997 2z"/>
           </svg>
+          <span>LET&apos;S TALK</span>
         </a>
       </div>
-
       <div className="divisions-grid">
         {DIVISIONS.map((d, i) => (
-          <div
-            key={d.key}
-            className={`div-card${visible ? ` div-card--visible div-card--d${i + 1}` : ''}`}
-          >
-            <div className="div-card-img">
-              <img src={d.img} alt={`${d.brand} ${d.sub}`} loading="lazy" />
-            </div>
-            <div className="div-card-body">
-              <div className="div-card-top">
-                <span className="div-icon">{d.icon}</span>
-                <div>
-                  <p className="div-brand">
-                    {d.brand} <span className="c-red">{d.sub}</span>
-                  </p>
-                  <p className="div-tagline">{d.tagline}</p>
-                </div>
-              </div>
-              <div className="div-bullets">
-                <ul>
-                  {d.col1.map(b => <li key={b}>{b}</li>)}
-                </ul>
-                <ul>
-                  {d.col2.map(b => <li key={b}>{b}</li>)}
-                </ul>
-              </div>
-              <Link to="/contact" className="div-learn-more">
-                Learn More
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14">
-                  <path d="M5 12h14M13 6l6 6-6 6"/>
-                </svg>
-              </Link>
-            </div>
-          </div>
+          <DivCard key={d.key} d={d} visible={visible} index={i} />
         ))}
       </div>
     </section>
@@ -305,10 +365,10 @@ function PortfolioSection() {
 ───────────────────────────────────────────── */
 const POSTS = [
   { seed: 'ra-reel1',  title: 'Brand Reels',       likes: '89K',  comments: '1,230', emoji: '👍' },
-  { seed: 'ra-wed1',   title: 'Wedding Highlights', likes: '125K', comments: '2,490', featured: true },
-  { seed: 'ra-evt1',   title: 'Event Recaps',       likes: '78K',  comments: '890',   emoji: '❤️' },
+  { seed: 'ra-wed1',   title: 'Wedding Highlights', likes: '125K', comments: '2,490', emoji: '❤️' },
+  { seed: 'ra-evt1',   title: 'Event Recaps',       likes: '78K',  comments: '890',   emoji: '🎬' },
   { seed: 'ra-prod1',  title: 'Product Campaigns',  likes: '66K',  comments: '970',   emoji: '😊' },
-  { seed: 'ra-celeb1', title: 'Celebrity Moments',  likes: '92K',  comments: '1,650', emoji: '❤️' },
+  { seed: 'ra-celeb1', title: 'Celebrity Moments',  likes: '92K',  comments: '1,650', emoji: '🔥' },
 ];
 
 function SocialBuzzSection() {
@@ -352,14 +412,13 @@ function SocialBuzzSection() {
           {POSTS.map((p, i) => (
             <div
               key={p.seed}
-              className={`sb-card-outer${p.featured ? ' sb-card-outer--featured' : ''}${visible ? ` sb-card-outer--visible sb-pd${i + 1}` : ''}`}
+              className={`sb-card-outer${visible ? ` sb-card-outer--visible sb-pd${i + 1}` : ''}`}
             >
-              {/* Floating reaction emoji */}
               {p.emoji && (
                 <span className={`sb-float-emoji sb-float-emoji--${i}`}>{p.emoji}</span>
               )}
 
-              <div className={`sb-card${p.featured ? ' sb-card--featured' : ''}`}>
+              <div className="sb-card">
                 {/* Image area */}
                 <div className="sb-card-img">
                   <img

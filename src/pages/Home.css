@@ -55,20 +55,189 @@
 }
 
 /* =====================================================================
-   HERO SECTION  —  pure full-bleed banner, no text
+   HERO SECTION  —  full-screen premium slider
 ===================================================================== */
 .hero-section {
-  display: block;
+  position: relative;
   width: 100%;
-  line-height: 0;
+  height: 100vh;
+  min-height: 580px;
+  overflow: hidden;
   background: #0D0D0D;
 }
 
-.hero-banner-full {
+/* ── Slide images ── */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-slide--active { opacity: 1; }
+
+.hero-slide img {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
   object-fit: cover;
+  display: block;
+  /* Ken Burns subtle zoom */
+  transform: scale(1.08);
+  transition: transform 5.8s ease;
+}
+.hero-slide--active img { transform: scale(1); }
+
+/* ── Dark gradient overlay ── */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.15) 100%),
+    linear-gradient(to top,   rgba(0,0,0,0.55) 0%,  transparent 55%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Logo ── */
+.hero-logo {
+  position: absolute;
+  top: 1.8rem;
+  left: var(--px, 2rem);
+  z-index: 3;
+}
+.hero-logo img {
+  height: 52px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+
+/* ── Text content (bottom-left) ── */
+.hero-content {
+  position: absolute;
+  bottom: 6rem;
+  left: var(--px, 2rem);
+  z-index: 2;
+  max-width: 720px;
+}
+
+/* Division tag */
+.hero-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin: 0 0 1rem;
+  opacity: 0;
+  animation: heroFadeUp 0.6s 0.05s ease forwards;
+}
+.hero-tag::before {
+  content: '';
+  display: inline-block;
+  width: 30px;
+  height: 2px;
+  background: #C81010;
+  flex-shrink: 0;
+}
+
+/* Text lines */
+.hero-lines { display: flex; flex-direction: column; gap: 0.05em; }
+
+.hero-line {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 6.5vw, 7.2rem);
+  color: #ffffff;
+  line-height: 0.96;
+  letter-spacing: 0.02em;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(36px);
+  animation: heroLineIn 0.75s ease forwards;
+}
+.hero-line--0 { animation-delay: 0.18s; }
+.hero-line--1 { animation-delay: 0.32s; }
+.hero-line--2 { animation-delay: 0.46s; color: rgba(255,255,255,0.55); }
+
+@keyframes heroLineIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFadeUp {
+  to { opacity: 1; }
+}
+
+/* ── Bottom footer: counter + dots ── */
+.hero-footer {
+  position: absolute;
+  bottom: 2.4rem;
+  left: var(--px, 2rem);
+  right: var(--px, 2rem);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hero-counter {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.35);
+  min-width: 4ch;
+}
+.hero-counter strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.hero-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.hero-dot {
+  height: 2px;
+  width: 24px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.28);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s, width 0.3s ease;
+}
+.hero-dot--on {
+  background: #C81010;
+  width: 40px;
+}
+
+/* ── Auto-progress bar at very bottom ── */
+.hero-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  z-index: 3;
+}
+.hero-progress-fill {
+  height: 100%;
+  width: 0;
+  background: #C81010;
+  box-shadow: 0 0 8px rgba(200,16,16,0.5);
+  animation: heroProg 5.5s linear forwards;
+}
+@keyframes heroProg {
+  to { width: 100%; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .hero-content { bottom: 5rem; }
+  .hero-line { font-size: clamp(2.2rem, 9vw, 3.5rem); }
 }
 
 /* =====================================================================
@@ -108,9 +277,9 @@
 }
 
 .divisions-h2 {
-  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-size: clamp(2.2rem, 3.8vw, 3.4rem);
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.2;
   color: #0D0D0D;
   margin-top: 0.3rem;
 }
@@ -118,11 +287,11 @@
 .cta-whatsapp {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.8rem 1.8rem;
+  gap: 0.75rem;
+  padding: 1rem 2.2rem;
   background: #C81010;
   color: #fff;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-decoration: none;
@@ -145,9 +314,10 @@
 }
 
 .div-card {
+  position: relative;
   border: 1px solid #eee;
   border-radius: 14px;
-  overflow: hidden;
+  overflow: visible; /* allow icon to overlap outside image */
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s;
@@ -163,47 +333,55 @@
   transform: translateY(-4px);
 }
 
-.div-card-img { line-height: 0; overflow: hidden; }
+.div-card-img {
+  position: relative;
+  line-height: 0;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0; /* clip image at top corners */
+  height: 300px;
+}
+
 .div-card-img img {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  display: block;
+  transition: transform 0.6s ease;
 }
 .div-card:hover .div-card-img img { transform: scale(1.04); }
 
-.div-card-body { padding: 1.4rem 1.4rem 1.6rem; }
-
-.div-card-top {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
+/* Icon overlapping image bottom — now child of div-card not div-card-img */
 .div-icon {
+  position: absolute;
+  top: calc(300px - 29px); /* image height - half icon = perfectly straddles edge */
+  left: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   background: #C81010;
   color: #ffffff;
-  flex-shrink: 0;
+  z-index: 4;
+  box-shadow: 0 4px 16px rgba(200, 16, 16, 0.45);
 }
 
+.div-card-body { padding: 2.6rem 1.5rem 1.8rem; }
+
 .div-brand {
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: #0D0D0D;
   line-height: 1.2;
+  margin-bottom: 0.25rem;
 }
 
 .div-tagline {
-  font-size: 0.74rem;
+  font-size: 0.85rem;
   color: #888;
-  margin-top: 0.15rem;
+  margin-top: 0;
+  margin-bottom: 1.1rem;
 }
 
 .div-bullets {
@@ -216,7 +394,7 @@
 .div-bullets ul { display: flex; flex-direction: column; gap: 0.3rem; }
 
 .div-bullets li {
-  font-size: 0.74rem;
+  font-size: 0.84rem;
   color: #555;
   padding-left: 0.9rem;
   position: relative;
@@ -238,7 +416,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #C81010;
   text-decoration: none;
@@ -291,12 +469,12 @@
   flex-shrink: 0;
 }
 
-/* Tint PNG icons red */
+/* PNG icons — white */
 .stat-icon img {
   width: 28px;
   height: 28px;
   object-fit: contain;
-  filter: invert(1) sepia(1) saturate(5) hue-rotate(320deg) brightness(0.95);
+  filter: brightness(0) invert(1);
 }
 
 .stat-body { display: flex; flex-direction: column; }
@@ -585,7 +763,6 @@
 }
 
 .sb-card-outer--visible { opacity: 1; transform: translateY(0); }
-.sb-card-outer--featured.sb-card-outer--visible { transform: translateY(-18px); }
 
 .sb-pd1 { transition-delay: 0.06s; }
 .sb-pd2 { transition-delay: 0.13s; }
@@ -602,10 +779,11 @@
   filter: drop-shadow(0 2px 5px rgba(0,0,0,0.22));
   pointer-events: none;
 }
-.sb-float-emoji--0 { top: -26px; left:  6px; }  /* 👍 Brand Reels – top-left  */
-.sb-float-emoji--2 { top: -24px; right: 6px; }  /* ❤️ Event Recaps – top-right */
-.sb-float-emoji--3 { top: -26px; left: 50%; transform: translateX(-50%); } /* 😊 center */
-.sb-float-emoji--4 { top: -24px; right: 5px; }  /* ❤️ Celebrity – top-right  */
+.sb-float-emoji--0 { top: -26px; left:  6px; }
+.sb-float-emoji--1 { top: -24px; right: 6px; }
+.sb-float-emoji--2 { top: -26px; left: 50%; transform: translateX(-50%); }
+.sb-float-emoji--3 { top: -24px; left: 6px; }
+.sb-float-emoji--4 { top: -26px; right: 5px; }
 
 /* The actual phone-frame card */
 .sb-card {
@@ -624,19 +802,7 @@
   box-shadow: 0 10px 32px rgba(200,16,16,0.32);
 }
 
-/* Featured card: red border + red glow */
-.sb-card--featured {
-  border: 2px solid #C81010;
-  box-shadow:
-    0 0 0 1px rgba(200,16,16,0.25),
-    0 8px 30px rgba(200,16,16,0.38);
-}
-.sb-card--featured:hover {
-  transform: scale(1.04);
-  box-shadow:
-    0 0 0 2px #C81010,
-    0 14px 44px rgba(200,16,16,0.52);
-}
+/* All cards: red glow on hover (no persistent featured state) */
 
 /* Image area */
 .sb-card-img {
@@ -645,12 +811,9 @@
 }
 .sb-card-img img {
   width: 100%;
-  height: 185px;
+  height: 195px;
   object-fit: cover;
   display: block;
-}
-.sb-card--featured .sb-card-img img {
-  height: 215px;
 }
 
 /* Instagram icon badge – top-right of image */

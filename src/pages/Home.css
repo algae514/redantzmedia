@@ -108,8 +108,6 @@
   height: 52px;
   width: auto;
   display: block;
-  filter: brightness(0) invert(1);
-  opacity: 0.92;
 }
 
 /* ── Text content (bottom-left) ── */
@@ -150,18 +148,19 @@
 .hero-line {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(3.2rem, 6.5vw, 7.2rem);
+  font-size: clamp(1.6rem, 3.8vw, 4rem);
   color: #ffffff;
-  line-height: 0.96;
+  line-height: 1;
   letter-spacing: 0.02em;
   margin: 0;
+  white-space: nowrap;
   opacity: 0;
   transform: translateY(36px);
   animation: heroLineIn 0.75s ease forwards;
 }
 .hero-line--0 { animation-delay: 0.18s; }
 .hero-line--1 { animation-delay: 0.32s; }
-.hero-line--2 { animation-delay: 0.46s; color: rgba(255,255,255,0.55); }
+.hero-line--2 { animation-delay: 0.46s; color: rgba(255,255,255,0.6); }
 
 @keyframes heroLineIn {
   to { opacity: 1; transform: translateY(0); }
@@ -237,7 +236,7 @@
 /* ── Responsive ── */
 @media (max-width: 600px) {
   .hero-content { bottom: 5rem; }
-  .hero-line { font-size: clamp(2.2rem, 9vw, 3.5rem); }
+  .hero-line { font-size: clamp(1.3rem, 5.5vw, 2rem); }
 }
 
 /* =====================================================================
@@ -658,6 +657,32 @@
   background: #C81010;
 }
 
+/* YouTube play button — visible on all wedding items, scales on hover */
+.port-yt-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(200, 16, 16, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+  transition: transform 0.25s ease, background 0.25s;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+}
+.port-item:hover .port-yt-play {
+  transform: translate(-50%, -50%) scale(1.18);
+  background: #C81010;
+}
+
+/* Remove browser focus outline on YouTube link items */
+a.port-item { outline: none; }
+
 /* =====================================================================
    SOCIAL BUZZ SECTION  —  white background
 ===================================================================== */
@@ -671,15 +696,15 @@
   max-width: 1280px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 0.78fr 1.22fr;
-  gap: 3rem;
+  grid-template-columns: 450px 1fr;
+  gap: 4rem;
   align-items: center;
 }
 
-/* ── Left ── */
+/* ── Left column ── */
 .sb-left {
   opacity: 0;
-  transform: translateX(-30px);
+  transform: translateX(-24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .sb-left--visible { opacity: 1; transform: none; }
@@ -745,85 +770,70 @@
 }
 .sb-btn-outline:hover { background: #0D0D0D; color: #fff; }
 
-/* ── Right — phone-frame card row ── */
-.sb-cards-row {
-  display: flex;
-  gap: 0.85rem;
-  align-items: center;
-  padding-top: 2.5rem; /* headroom for floating emojis */
+/* ── Right — slider ── */
+.sb-slider-wrap {
+  position: relative;
+  padding-bottom: 2.4rem;
+  min-width: 0; /* prevent grid cell blowout — allows 1fr column to shrink */
 }
 
-/* Outer wrapper (handles reveal animation + featured lift) */
+/* Viewport clips sliding cards; vertical padding lets box-shadows bleed top/bottom */
+.sb-slider-vp {
+  overflow: hidden;
+  padding: 10px;
+  margin: -10px;
+}
+
+/* Sliding track */
+.sb-track {
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Individual card link — 4 per view */
 .sb-card-outer {
-  position: relative;
-  flex: 1;
+  flex: 0 0 calc(25% - 0.75rem);
+  text-decoration: none;
+  display: block;
+  outline: none; /* remove browser default focus ring */
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
 .sb-card-outer--visible { opacity: 1; transform: translateY(0); }
 
-.sb-pd1 { transition-delay: 0.06s; }
-.sb-pd2 { transition-delay: 0.13s; }
-.sb-pd3 { transition-delay: 0.20s; }
-.sb-pd4 { transition-delay: 0.27s; }
-.sb-pd5 { transition-delay: 0.34s; }
-
-/* Floating reaction emojis */
-.sb-float-emoji {
-  position: absolute;
-  font-size: 1.45rem;
-  z-index: 3;
-  line-height: 1;
-  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.22));
-  pointer-events: none;
-}
-.sb-float-emoji--0 { top: -26px; left:  6px; }
-.sb-float-emoji--1 { top: -24px; right: 6px; }
-.sb-float-emoji--2 { top: -26px; left: 50%; transform: translateX(-50%); }
-.sb-float-emoji--3 { top: -24px; left: 6px; }
-.sb-float-emoji--4 { top: -26px; right: 5px; }
-
-/* The actual phone-frame card */
+/* Card */
 .sb-card {
   background: #fff;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
   border: 1.5px solid #e8e8e8;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.10);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.09);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
 }
-
-/* Hover: zoom + red shadow */
-.sb-card:hover {
+.sb-card-outer:hover .sb-card {
   transform: scale(1.04);
-  box-shadow: 0 10px 32px rgba(200,16,16,0.32);
+  border-color: #C81010;
+  box-shadow: 0 10px 32px rgba(200,16,16,0.28);
 }
 
-/* All cards: red glow on hover (no persistent featured state) */
-
-/* Image area */
-.sb-card-img {
-  position: relative;
-  line-height: 0;
-}
+/* Image */
+.sb-card-img { position: relative; line-height: 0; }
 .sb-card-img img {
   width: 100%;
-  height: 195px;
+  height: 210px;
   object-fit: cover;
   display: block;
 }
 
-/* Instagram icon badge – top-right of image */
+/* Instagram badge */
 .sb-card-badge {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 24px;
-  height: 24px;
-  background: rgba(255,255,255,0.22);
+  top: 8px; right: 8px;
+  width: 24px; height: 24px;
+  background: rgba(0,0,0,0.35);
   backdrop-filter: blur(4px);
   border-radius: 7px;
   display: flex;
@@ -831,7 +841,7 @@
   justify-content: center;
 }
 
-/* Centered play button */
+/* Play overlay — appears on hover */
 .sb-card-play {
   position: absolute;
   inset: 0;
@@ -839,42 +849,84 @@
   align-items: center;
   justify-content: center;
   background: rgba(0,0,0,0.18);
+  opacity: 0;
+  transition: opacity 0.25s;
 }
+.sb-card-outer:hover .sb-card-play { opacity: 1; }
 .sb-card-play svg {
   background: rgba(255,255,255,0.92);
   border-radius: 50%;
   padding: 8px;
-  width: 36px;
-  height: 36px;
+  width: 38px; height: 38px;
   color: #222;
   box-shadow: 0 2px 10px rgba(0,0,0,0.22);
 }
 
-/* Meta: title + stats */
-.sb-card-meta {
-  padding: 0.65rem 0.8rem 0.75rem;
-  background: #fff;
-}
+/* Meta */
+.sb-card-meta { padding: 0.65rem 0.75rem 0.75rem; }
 .sb-card-title {
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: #111;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.38rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .sb-card-stats {
   display: flex;
-  gap: 0.7rem;
-  font-size: 0.67rem;
+  gap: 0.65rem;
+  font-size: 0.66rem;
   color: #666;
 }
 .sb-card-stats span {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.22rem;
 }
+
+/* Prev / Next arrows */
+.sb-arrow {
+  position: absolute;
+  top: calc(50% - 1.2rem); /* centre vertically within card area */
+  transform: translateY(-50%);
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.14);
+  color: #333;
+  z-index: 2;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.sb-arrow:hover { background: #C81010; border-color: #C81010; color: #fff; }
+.sb-arrow--prev { left:  -22px; }
+.sb-arrow--next { right: -22px; }
+
+/* Dot indicators */
+.sb-dots {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.sb-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s, transform 0.25s;
+}
+.sb-dot--on { background: #C81010; transform: scale(1.35); }
 
 /* =====================================================================
    CLIENTS SECTION
@@ -1118,10 +1170,7 @@
 @media (max-width: 1024px) {
   .stats-inner    { grid-template-columns: repeat(2, 1fr); }
   .divisions-grid { grid-template-columns: 1fr 1fr; }
-  .sb-inner       { grid-template-columns: 1fr; gap: 2.5rem; }
-  .sb-cards-row   { overflow-x: auto; padding-bottom: 1rem; scrollbar-width: none; }
-  .sb-cards-row::-webkit-scrollbar { display: none; }
-  .sb-card-outer  { flex: 0 0 140px; }
+  .sb-inner { grid-template-columns: 1fr; gap: 2.5rem; }
 }
 
 @media (max-width: 860px) {

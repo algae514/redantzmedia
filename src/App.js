@@ -7,6 +7,9 @@ import Home2 from './pages/Home2';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import WeddingQuotation from './pages/WeddingQuotation';
+import Studios from './pages/Studios';
+import Media from './pages/Media';
+import Digitals from './pages/Digitals';
 
 function AppShell() {
   const { pathname } = useLocation();
@@ -17,11 +20,14 @@ function AppShell() {
       {!isHome && <Header />}
       <main className={isHome ? 'main-full' : 'main-content'}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home2 />} />
-          <Route path="/wedding-quotation" element={<WeddingQuotation />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/"                   element={<Home />} />
+          <Route path="/home"               element={<Home2 />} />
+          <Route path="/studios"            element={<Studios />} />
+          <Route path="/media"              element={<Media />} />
+          <Route path="/digitals"           element={<Digitals />} />
+          <Route path="/about"              element={<About />} />
+          <Route path="/contact"            element={<Contact />} />
+          <Route path="/wedding-quotation"  element={<WeddingQuotation />} />
         </Routes>
       </main>
       <Footer />

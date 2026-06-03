@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+import SEO_DATA from '../data/seo';
 import './Home.css';
 
 /* ─────────────────────────────────────────────
@@ -149,6 +151,7 @@ function HeroSection() {
 const DIVISIONS = [
   {
     key: 'studios',
+    route: '/studios',
     brand: 'RedAntz', sub: 'Studios',
     tagline: 'Weddings & Personal Celebrations',
     img: 'https://picsum.photos/seed/ra-wed/700/520',
@@ -163,6 +166,7 @@ const DIVISIONS = [
   },
   {
     key: 'media',
+    route: '/media',
     brand: 'RedAntz', sub: 'Media',
     tagline: 'Events, Entertainment & Production',
     img: 'https://picsum.photos/seed/ra-event/700/520',
@@ -176,6 +180,7 @@ const DIVISIONS = [
   },
   {
     key: 'digitals',
+    route: '/digitals',
     brand: 'RedAntz', sub: 'Digitals',
     tagline: 'Branding & Digital Marketing',
     img: 'https://picsum.photos/seed/ra-digital/700/520',
@@ -206,7 +211,7 @@ function DivCard({ d, visible, index }) {
           <ul>{d.col1.map(b => <li key={b}>{b}</li>)}</ul>
           <ul>{d.col2.map(b => <li key={b}>{b}</li>)}</ul>
         </div>
-        <Link to="/contact" className="div-learn-more">
+        <Link to={d.route} className="div-learn-more">
           Learn More
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14">
             <path d="M5 12h14M13 6l6 6-6 6"/>
@@ -287,15 +292,27 @@ function StatsSection() {
 ───────────────────────────────────────────── */
 const TABS = ['ALL', 'BRANDING', 'CORPORATE', 'SOCIAL MEDIA', 'VIDEO', 'WEDDING'];
 
+/* YouTube helper */
+const ytThumb = (id) => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+const ytUrl   = (id) => `https://www.youtube.com/watch?v=${id}`;
+
 const PORTFOLIO = [
-  { id: 1, name: 'ELEVATE',       cat: 'Brand Identity',         tag: 'BRANDING',      img: 'https://picsum.photos/seed/brand-elevate/600/450'   },
-  { id: 2, name: 'AXIS BANK',     cat: 'Corporate Film',         tag: 'CORPORATE',     img: 'https://picsum.photos/seed/corp-axis/600/450'       },
-  { id: 3, name: 'Flavors',       cat: 'Social Media Campaign',  tag: 'SOCIAL MEDIA',  img: 'https://picsum.photos/seed/food-flavors/600/450'    },
-  { id: 4, name: 'WEDDING FILM',  cat: 'Cinematic Story',        tag: 'VIDEO',         img: 'https://picsum.photos/seed/wed-film/600/450'        },
-  { id: 5, name: 'TechNova',      cat: 'Branding',               tag: 'BRANDING',      img: 'https://picsum.photos/seed/tech-nova/600/450'       },
-  { id: 6, name: 'ANNUAL SUMMIT', cat: 'Event Coverage',         tag: 'CORPORATE',     img: 'https://picsum.photos/seed/summit-event/600/450'    },
-  { id: 7, name: 'RUNWAY',        cat: 'Fashion Film',           tag: 'VIDEO',         img: 'https://picsum.photos/seed/fashion-rwy/600/450'     },
-  { id: 8, name: 'SAVE THE DATE', cat: 'Invitation Film',        tag: 'WEDDING',       img: 'https://picsum.photos/seed/savedate-inv/600/450'    },
+  { id: 1, name: 'ELEVATE',       cat: 'Brand Identity',        tag: 'BRANDING',     img: 'https://picsum.photos/seed/brand-elevate/600/450' },
+  { id: 2, name: 'AXIS BANK',     cat: 'Corporate Film',        tag: 'CORPORATE',    img: 'https://picsum.photos/seed/corp-axis/600/450'    },
+  { id: 3, name: 'Flavors',       cat: 'Social Media Campaign', tag: 'SOCIAL MEDIA', img: 'https://picsum.photos/seed/food-flavors/600/450' },
+  { id: 4, name: 'WEDDING FILM',  cat: 'Cinematic Story',       tag: 'VIDEO',        img: 'https://picsum.photos/seed/wed-film/600/450'     },
+  { id: 5, name: 'TechNova',      cat: 'Branding',              tag: 'BRANDING',     img: 'https://picsum.photos/seed/tech-nova/600/450'    },
+  { id: 6, name: 'ANNUAL SUMMIT', cat: 'Event Coverage',        tag: 'CORPORATE',    img: 'https://picsum.photos/seed/summit-event/600/450' },
+  { id: 7, name: 'RUNWAY',        cat: 'Fashion Film',          tag: 'VIDEO',        img: 'https://picsum.photos/seed/fashion-rwy/600/450'  },
+  /* ── Wedding: real YouTube videos ── */
+  { id: 10, name: 'Cinematic Highlights', cat: 'Wedding Film', tag: 'WEDDING', img: ytThumb('aInXcy-LXNo'), ytUrl: ytUrl('aInXcy-LXNo') },
+  { id: 11, name: 'Wedding Story',        cat: 'Wedding Film', tag: 'WEDDING', img: ytThumb('mh5dMo1I3MM'), ytUrl: ytUrl('mh5dMo1I3MM') },
+  { id: 12, name: 'Love & Light',         cat: 'Wedding Film', tag: 'WEDDING', img: ytThumb('cUOHLU_SLQE'), ytUrl: ytUrl('cUOHLU_SLQE') },
+  { id: 13, name: 'Timeless Moments',     cat: 'Wedding Film', tag: 'WEDDING', img: ytThumb('JR6iU-hSs68'), ytUrl: ytUrl('JR6iU-hSs68') },
+  { id: 14, name: 'Forever Yours',        cat: 'Wedding Film', tag: 'WEDDING', img: ytThumb('fzPoeU4uzBo'), ytUrl: ytUrl('fzPoeU4uzBo') },
+  { id: 15, name: 'The Grand Wedding',    cat: 'Wedding Film', tag: 'WEDDING', img: ytThumb('QBFbZFsuXHI'), ytUrl: ytUrl('QBFbZFsuXHI') },
+  { id: 16, name: 'A Beautiful Ceremony', cat: 'Wedding Film', tag: 'WEDDING', img: ytThumb('mKYDNP-CCo0'), ytUrl: ytUrl('mKYDNP-CCo0') },
+  { id: 17, name: 'Eternal Vows',         cat: 'Wedding Film', tag: 'WEDDING', img: ytThumb('V2DZglLI-BI'), ytUrl: ytUrl('V2DZglLI-BI') },
 ];
 
 function PortfolioSection() {
@@ -336,25 +353,50 @@ function PortfolioSection() {
       </div>
 
       <div className="port-grid">
-        {items.map((p, i) => (
-          <div
-            key={p.id}
-            className={`port-item${visible ? ` port-item--visible port-d${(i % 4) + 1}` : ''}`}
-          >
-            <img src={p.img} alt={p.name} loading="lazy" />
-            <div className="port-overlay">
-              <div>
-                <p className="port-name">{p.name}</p>
-                <p className="port-cat">{p.cat}</p>
+        {items.map((p, i) => {
+          const Tag = p.ytUrl ? 'a' : 'div';
+          const linkProps = p.ytUrl
+            ? { href: p.ytUrl, target: '_blank', rel: 'noreferrer' }
+            : {};
+          return (
+            <Tag
+              key={p.id}
+              {...linkProps}
+              className={`port-item${visible ? ` port-item--visible port-d${(i % 4) + 1}` : ''}`}
+            >
+              <img src={p.img} alt={p.name} loading="lazy" />
+
+              {/* YouTube play button */}
+              {p.ytUrl && (
+                <div className="port-yt-play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="white" width="20" height="20">
+                    <polygon points="6 3 20 12 6 21 6 3"/>
+                  </svg>
+                </div>
+              )}
+
+              <div className="port-overlay">
+                <div>
+                  <p className="port-name">{p.name}</p>
+                  <p className="port-cat">{p.cat}</p>
+                </div>
+                <span className="port-arrow-btn" aria-hidden="true">
+                  {p.ytUrl ? (
+                    /* YouTube icon for wedding items */
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                      <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.6.47a2.78 2.78 0 00-1.94 1.97A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.94 1.97C5.12 20 12 20 12 20s6.88 0 8.6-.47a2.78 2.78 0 001.94-1.97A29 29 0 0023 12a29 29 0 00-.46-5.58z"/>
+                      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/>
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" width="14" height="14">
+                      <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                  )}
+                </span>
               </div>
-              <span className="port-arrow-btn" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" width="14" height="14">
-                  <path d="M5 12h14M13 6l6 6-6 6"/>
-                </svg>
-              </span>
-            </div>
-          </div>
-        ))}
+            </Tag>
+          );
+        })}
       </div>
     </section>
   );
@@ -364,20 +406,54 @@ function PortfolioSection() {
    SOCIAL BUZZ SECTION
 ───────────────────────────────────────────── */
 const POSTS = [
-  { seed: 'ra-reel1',  title: 'Brand Reels',       likes: '89K',  comments: '1,230', emoji: '👍' },
-  { seed: 'ra-wed1',   title: 'Wedding Highlights', likes: '125K', comments: '2,490', emoji: '❤️' },
-  { seed: 'ra-evt1',   title: 'Event Recaps',       likes: '78K',  comments: '890',   emoji: '🎬' },
-  { seed: 'ra-prod1',  title: 'Product Campaigns',  likes: '66K',  comments: '970',   emoji: '😊' },
-  { seed: 'ra-celeb1', title: 'Celebrity Moments',  likes: '92K',  comments: '1,650', emoji: '🔥' },
+  { seed: 'ra-reel1',  title: 'Brand Reels',       likes: '89K',  comments: '1,230', url: 'https://www.instagram.com/p/DYXPG0EzgH5/' },
+  { seed: 'ra-wed1',   title: 'Wedding Highlights', likes: '125K', comments: '2,490', url: 'https://www.instagram.com/p/DRjz-FwDFRx/' },
+  { seed: 'ra-evt1',   title: 'Event Recaps',       likes: '78K',  comments: '890',   url: 'https://www.instagram.com/p/DNDozHrSiOR/' },
+  { seed: 'ra-prod1',  title: 'Product Campaigns',  likes: '66K',  comments: '970',   url: 'https://www.instagram.com/p/DYpW1VsE_U9/' },
+  { seed: 'ra-celeb1', title: 'Celebrity Moments',  likes: '92K',  comments: '1,650', url: 'https://www.instagram.com/p/DYcLRXFTzpB/' },
+  { seed: 'ra-reel2',  title: 'Creative Shoots',    likes: '71K',  comments: '810',   url: 'https://www.instagram.com/p/DYI7687DNxx/' },
 ];
+
+const SB_VISIBLE = 4; /* cards visible at once on desktop */
 
 function SocialBuzzSection() {
   const [ref, visible] = useReveal(0.08);
+  const [current, setCurrent] = useState(0);
+  const trackRef = useRef(null);
+  const max = POSTS.length - SB_VISIBLE; /* 6 - 4 = 2 */
+
+  /* Read actual rendered card width + gap, then translate the track */
+  const moveTo = useCallback((idx) => {
+    if (!trackRef.current) return;
+    const card = trackRef.current.firstElementChild;
+    if (!card) return;
+    const gap = parseFloat(getComputedStyle(trackRef.current).gap) || 16;
+    trackRef.current.style.transform = `translateX(-${idx * (card.offsetWidth + gap)}px)`;
+  }, []);
+
+  useEffect(() => { moveTo(current); }, [current, moveTo]);
+
+  /* Re-calculate on window resize */
+  useEffect(() => {
+    const onResize = () => moveTo(current);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [current, moveTo]);
+
+  /* Auto-advance */
+  useEffect(() => {
+    const t = setInterval(() => setCurrent(c => (c >= max ? 0 : c + 1)), 3500);
+    return () => clearInterval(t);
+  }, [max]);
+
+  const prev = () => setCurrent(c => (c <= 0 ? max : c - 1));
+  const next = () => setCurrent(c => (c >= max ? 0 : c + 1));
+
   return (
     <section className="social-buzz-section" ref={ref}>
       <div className="sb-inner">
 
-        {/* ─── Left text ─── */}
+        {/* ─── Left: text + buttons ─── */}
         <div className={`sb-left${visible ? ' sb-left--visible' : ''}`}>
           <p className="section-label c-red">SOCIAL BUZZ</p>
           <h2 className="sb-headline">
@@ -389,7 +465,7 @@ function SocialBuzzSection() {
             content designed to engage, perform and convert.
           </p>
           <div className="sb-ctas">
-            <a href="#!" className="sb-btn-red">
+            <a href="https://www.instagram.com/redantzstudios" className="sb-btn-red" target="_blank" rel="noreferrer">
               VIEW INSTAGRAM
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
                 <rect x="2" y="2" width="20" height="20" rx="5"/>
@@ -397,7 +473,7 @@ function SocialBuzzSection() {
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
               </svg>
             </a>
-            <a href="#!" className="sb-btn-outline">
+            <a href="https://www.youtube.com/@RedAntzStudios" className="sb-btn-outline" target="_blank" rel="noreferrer">
               WATCH SHOWREEL
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
                 <circle cx="12" cy="12" r="10"/>
@@ -407,64 +483,85 @@ function SocialBuzzSection() {
           </div>
         </div>
 
-        {/* ─── Right phone-frame cards ─── */}
-        <div className="sb-cards-row">
-          {POSTS.map((p, i) => (
-            <div
-              key={p.seed}
-              className={`sb-card-outer${visible ? ` sb-card-outer--visible sb-pd${i + 1}` : ''}`}
-            >
-              {p.emoji && (
-                <span className={`sb-float-emoji sb-float-emoji--${i}`}>{p.emoji}</span>
-              )}
+        {/* ─── Right: slider ─── */}
+        <div className="sb-slider-wrap">
 
-              <div className="sb-card">
-                {/* Image area */}
-                <div className="sb-card-img">
-                  <img
-                    src={`https://picsum.photos/seed/${p.seed}/300/450`}
-                    alt={p.title}
-                    loading="lazy"
-                  />
-                  {/* Instagram badge top-right */}
-                  <span className="sb-card-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" width="12" height="12">
-                      <rect x="2" y="2" width="20" height="20" rx="5"/>
-                      <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                    </svg>
-                  </span>
-                  {/* Play button */}
-                  <div className="sb-card-play">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
-                      <polygon points="6 3 20 12 6 21 6 3"/>
-                    </svg>
+          {/* Viewport clips overflowing cards */}
+          <div className="sb-slider-vp">
+            <div className="sb-track" ref={trackRef}>
+              {POSTS.map((p, i) => (
+                <a
+                  key={p.seed}
+                  href={p.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`sb-card-outer${visible ? ' sb-card-outer--visible' : ''}`}
+                  style={{ transitionDelay: visible ? `${i * 0.07}s` : '0s' }}
+                >
+                  <div className="sb-card">
+                    <div className="sb-card-img">
+                      <img src={`https://picsum.photos/seed/${p.seed}/300/450`} alt={p.title} loading="lazy" />
+                      <span className="sb-card-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" width="12" height="12">
+                          <rect x="2" y="2" width="20" height="20" rx="5"/>
+                          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                      </span>
+                      <div className="sb-card-play">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+                          <polygon points="6 3 20 12 6 21 6 3"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="sb-card-meta">
+                      <p className="sb-card-title">{p.title}</p>
+                      <div className="sb-card-stats">
+                        <span>
+                          <svg viewBox="0 0 24 24" fill="#C81010" width="11" height="11">
+                            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+                          </svg>
+                          {p.likes}
+                        </span>
+                        <span>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="2" width="11" height="11">
+                            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                          </svg>
+                          {p.comments}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-
-                {/* Meta below */}
-                <div className="sb-card-meta">
-                  <p className="sb-card-title">{p.title}</p>
-                  <div className="sb-card-stats">
-                    <span>
-                      <svg viewBox="0 0 24 24" fill="#C81010" width="11" height="11">
-                        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-                      </svg>
-                      {p.likes}
-                    </span>
-                    <span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="2" width="11" height="11">
-                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-                      </svg>
-                      {p.comments}
-                    </span>
-                  </div>
-                </div>
-              </div>
+                </a>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
 
+          {/* Prev / Next arrows */}
+          <button className="sb-arrow sb-arrow--prev" onClick={prev} aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" width="16" height="16">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button className="sb-arrow sb-arrow--next" onClick={next} aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" width="16" height="16">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+
+          {/* Dot indicators */}
+          <div className="sb-dots">
+            {Array.from({ length: max + 1 }).map((_, i) => (
+              <button
+                key={i}
+                className={`sb-dot${i === current ? ' sb-dot--on' : ''}`}
+                onClick={() => setCurrent(i)}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
+          </div>
+
+        </div>
       </div>
     </section>
   );
@@ -573,15 +670,18 @@ export default function Home() {
   const handleDone = useCallback(() => setLoaderDone(true), []);
 
   return (
-    <div className="home-page">
-      {!loaderDone && <PageLoader onDone={handleDone} />}
-      <HeroSection />
-      <DivisionsSection />
-      <StatsSection />
-      <PortfolioSection />
-      <SocialBuzzSection />
-      <ClientsSection />
-      <CTASection />
-    </div>
+    <>
+      <SEO seo={SEO_DATA.home} />
+      <div className="home-page">
+        {!loaderDone && <PageLoader onDone={handleDone} />}
+        <HeroSection />
+        <DivisionsSection />
+        <StatsSection />
+        <PortfolioSection />
+        <SocialBuzzSection />
+        <ClientsSection />
+        <CTASection />
+      </div>
+    </>
   );
 }

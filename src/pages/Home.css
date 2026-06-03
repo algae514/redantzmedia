@@ -1163,43 +1163,141 @@ a.port-item { outline: none; }
 /* =====================================================================
    RESPONSIVE
 ===================================================================== */
+
+/* ── 1200px – Large tablet / small desktop ── */
 @media (max-width: 1200px) {
   .port-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* ── 1024px – Tablet landscape ── */
 @media (max-width: 1024px) {
-  .stats-inner    { grid-template-columns: repeat(2, 1fr); }
+  .stats-inner    { grid-template-columns: repeat(2, 1fr); overflow: hidden; }
+  .stat-item      { padding: 1.8rem 1.5rem; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .stat-item:nth-child(odd)  { border-right: 1px solid rgba(255,255,255,0.08); }
+  .stat-item:nth-child(3),
+  .stat-item:nth-child(4)    { border-bottom: none; }
   .divisions-grid { grid-template-columns: 1fr 1fr; }
-  .sb-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .sb-inner       { grid-template-columns: 1fr; gap: 2rem; }
 }
 
+/* ── 860px – Tablet portrait ── */
 @media (max-width: 860px) {
   .port-grid      { grid-template-columns: repeat(2, 1fr); }
   .divisions-grid { grid-template-columns: 1fr; }
+  .div-card-img   { height: 260px; }
+  .div-icon       { top: calc(260px - 29px); }
+
+  /* Hero text smaller */
+  .hero-line { font-size: clamp(1.4rem, 3.5vw, 3rem); }
+  .hero-content { bottom: 5rem; }
 }
 
+/* ── 768px – Mobile landscape / large phone ── */
+@media (max-width: 768px) {
+  /* Hero */
+  .hero-logo img  { height: 38px; }
+  .hero-content   { bottom: 4.5rem; left: 1.25rem; }
+  .hero-footer    { left: 1.25rem; right: 1.25rem; bottom: 1.6rem; }
+
+  /* Social Buzz – show 2 cards */
+  .sb-card-outer  { flex: 0 0 calc(50% - 0.5rem); }
+  .sb-slider-wrap { padding-bottom: 2rem; }
+  .sb-ctas        { flex-wrap: wrap; }
+
+  /* Clients – make scrollable on mobile */
+  .clients-arrow  { display: none; }
+  .clients-track  {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+    gap: 2rem;
+    scrollbar-width: none;
+  }
+  .clients-track::-webkit-scrollbar { display: none; }
+
+  /* Portfolio header */
+  .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .portfolio-header .btn-outline { align-self: flex-start; }
+}
+
+/* ── 640px – Standard mobile ── */
 @media (max-width: 640px) {
-  .stats-inner   { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-  .stat-item     { padding: 1.2rem 1rem; }
-  .port-grid     { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
-  .divisions-header { flex-direction: column; align-items: flex-start; }
+  /* Section padding */
+  .divisions-section  { padding: 3rem 1.25rem; }
+  .portfolio-section  { padding: 3rem 1.25rem; }
+  .social-buzz-section{ padding: 3rem 1.25rem; }
+  .clients-section    { padding: 2.5rem 1.25rem; }
+  .cta-section        { padding: 4rem 1.25rem; }
+  .stats-section      { padding: 2.5rem 1.25rem; }
+
+  /* Divisions */
+  .divisions-header   { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+  .cta-whatsapp       { width: 100%; justify-content: center; }
+  .div-card-img       { height: 220px; }
+  .div-icon           { top: calc(220px - 29px); }
+  .div-card-body      { padding: 2.2rem 1.2rem 1.4rem; }
+
+  /* Stats — stack each item vertically to prevent row overflow */
+  .stats-section      { overflow: hidden; }
+  .stats-inner        { grid-template-columns: 1fr 1fr; gap: 0; }
+  .stat-item          {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.4rem 0.75rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    gap: 0.5rem;
+  }
+  .stat-item:nth-child(odd)  { border-right: 1px solid rgba(255,255,255,0.08); }
+  .stat-item:last-child, .stat-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+  .stat-num           { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+  .stat-label         { text-align: center; }
+
+  /* Portfolio */
+  .port-grid          { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .port-tabs          { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+  .port-tabs::-webkit-scrollbar { display: none; }
+
+  /* Social Buzz */
+  .sb-headline        { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+  .sb-desc            { font-size: 0.82rem; }
+  .sb-btn-red,
+  .sb-btn-outline     { font-size: 0.7rem; padding: 0.7rem 1.2rem; }
+
+  /* CTA */
+  .cta-inner          { flex-direction: column; text-align: center; gap: 2rem; }
+  .cta-sub            { max-width: 100%; }
+  .cta-circle-wrap    { width: 220px; height: 220px; }
 }
 
-@media (max-width: 640px) {
-  .cta-inner        { flex-direction: column; text-align: center; }
-  .cta-sub          { max-width: 100%; }
-  .cta-circle-wrap  { width: 240px; height: 240px; }
-}
-
+/* ── 480px – Small phone ── */
 @media (max-width: 480px) {
-  .port-tabs        { overflow-x: auto; flex-wrap: nowrap; }
-  .port-grid        { grid-template-columns: 1fr; }
-  .stats-inner      { grid-template-columns: 1fr 1fr; }
-  .cta-section      { padding: 4rem var(--px); }
-  .cta-circle-wrap  { width: 200px; height: 200px; }
+  /* Hero */
+  .hero-logo img  { height: 32px; }
+  .hero-line      { font-size: clamp(1.2rem, 5vw, 1.8rem); }
+
+  /* Divisions */
+  .divisions-h2   { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+  .div-card-img   { height: 200px; }
+  .div-icon       { top: calc(200px - 29px); }
+
+  /* Portfolio – single column */
+  .port-grid      { grid-template-columns: 1fr; }
+
+  /* Social Buzz – 1 card */
+  .sb-card-outer  { flex: 0 0 100%; }
+  .sb-card-img img{ height: 240px; }
+
+  /* CTA */
+  .cta-circle-wrap { width: 190px; height: 190px; }
+  .cta-circle-btn  { font-size: 0.75rem; letter-spacing: 0.12em; }
 }
 
+/* ── 360px – Very small phones ── */
 @media (max-width: 360px) {
-  .hero-headline { font-size: 2.6rem; }
-  .stats-inner   { grid-template-columns: 1fr; }
+  .stats-inner        { grid-template-columns: 1fr; }
+  .stat-item          { border-right: none !important; }
+  .hero-line          { font-size: clamp(1.1rem, 4.5vw, 1.6rem); }
+  .sb-card-img img    { height: 200px; }
 }

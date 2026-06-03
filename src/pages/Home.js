@@ -414,13 +414,28 @@ const POSTS = [
   { seed: 'ra-reel2',  title: 'Creative Shoots',    likes: '71K',  comments: '810',   url: 'https://www.instagram.com/p/DYI7687DNxx/' },
 ];
 
-const SB_VISIBLE = 4; /* cards visible at once on desktop */
-
 function SocialBuzzSection() {
   const [ref, visible] = useReveal(0.08);
   const [current, setCurrent] = useState(0);
+  const [sbVisible, setSbVisible] = useState(4);
   const trackRef = useRef(null);
-  const max = POSTS.length - SB_VISIBLE; /* 6 - 4 = 2 */
+  const max = Math.max(0, POSTS.length - sbVisible);
+
+  /* Responsive: update how many cards are visible based on screen width */
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      setSbVisible(w < 480 ? 1 : w < 768 ? 2 : 4);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  /* Clamp current index when sbVisible changes */
+  useEffect(() => {
+    setCurrent(c => Math.min(c, max));
+  }, [max]);
 
   /* Read actual rendered card width + gap, then translate the track */
   const moveTo = useCallback((idx) => {

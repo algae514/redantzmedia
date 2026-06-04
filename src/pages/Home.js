@@ -406,12 +406,12 @@ function PortfolioSection() {
    SOCIAL BUZZ SECTION
 ───────────────────────────────────────────── */
 const POSTS = [
-  { seed: 'ra-reel1',  title: 'Brand Reels',       likes: '89K',  comments: '1,230', url: 'https://www.instagram.com/p/DYXPG0EzgH5/' },
-  { seed: 'ra-wed1',   title: 'Wedding Highlights', likes: '125K', comments: '2,490', url: 'https://www.instagram.com/p/DRjz-FwDFRx/' },
-  { seed: 'ra-evt1',   title: 'Event Recaps',       likes: '78K',  comments: '890',   url: 'https://www.instagram.com/p/DNDozHrSiOR/' },
-  { seed: 'ra-prod1',  title: 'Product Campaigns',  likes: '66K',  comments: '970',   url: 'https://www.instagram.com/p/DYpW1VsE_U9/' },
-  { seed: 'ra-celeb1', title: 'Celebrity Moments',  likes: '92K',  comments: '1,650', url: 'https://www.instagram.com/p/DYcLRXFTzpB/' },
-  { seed: 'ra-reel2',  title: 'Creative Shoots',    likes: '71K',  comments: '810',   url: 'https://www.instagram.com/p/DYI7687DNxx/' },
+  { img: '/images/instagram/Thumbnail_1.png', title: 'Brand Reels',       likes: '89K',  comments: '1,230', url: 'https://www.instagram.com/p/DYpW1VsE_U9/' },
+  { img: '/images/instagram/Thumbnail_2.png', title: 'Wedding Highlights', likes: '125K', comments: '2,490', url: 'https://www.instagram.com/p/DYI7687DNxx/' },
+  { img: '/images/instagram/Thumbnail_3.png', title: 'Event Recaps',       likes: '78K',  comments: '890',   url: 'https://www.instagram.com/p/DYXPG0EzgH5/' },
+  { img: '/images/instagram/Thumbnail_4.png', title: 'Product Campaigns',  likes: '66K',  comments: '970',   url: 'https://www.instagram.com/p/DNDozHrSiOR/' },
+  { img: '/images/instagram/Thumbnail_5.png', title: 'Celebrity Moments',  likes: '92K',  comments: '1,650', url: 'https://www.instagram.com/p/DYcLRXFTzpB/' },
+  { img: '/images/instagram/Thumbnail_6.png', title: 'Creative Shoots',    likes: '71K',  comments: '810',   url: 'https://www.instagram.com/p/DRjz-FwDFRx/' },
 ];
 
 function SocialBuzzSection() {
@@ -515,7 +515,7 @@ function SocialBuzzSection() {
                 >
                   <div className="sb-card">
                     <div className="sb-card-img">
-                      <img src={`https://picsum.photos/seed/${p.seed}/300/450`} alt={p.title} loading="lazy" />
+                      <img src={p.img} alt={p.title} loading="lazy" />
                       <span className="sb-card-badge">
                         <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" width="12" height="12">
                           <rect x="2" y="2" width="20" height="20" rx="5"/>

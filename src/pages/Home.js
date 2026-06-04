@@ -154,7 +154,7 @@ const DIVISIONS = [
     route: '/studios',
     brand: 'RedAntz', sub: 'Studios',
     tagline: 'Weddings & Personal Celebrations',
-    img: 'https://picsum.photos/seed/ra-wed/700/520',
+    img: '/images/Image-1.jpeg',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="26" height="26">
         <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
@@ -169,7 +169,7 @@ const DIVISIONS = [
     route: '/media',
     brand: 'RedAntz', sub: 'Media',
     tagline: 'Events, Entertainment & Production',
-    img: 'https://picsum.photos/seed/ra-event/700/520',
+    img: '/images/Image-2.jpeg',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="26" height="26">
         <path d="M3 11l19-9-9 19-2-8-8-2z"/>
@@ -183,7 +183,7 @@ const DIVISIONS = [
     route: '/digitals',
     brand: 'RedAntz', sub: 'Digitals',
     tagline: 'Branding & Digital Marketing',
-    img: 'https://picsum.photos/seed/ra-digital/700/520',
+    img: '/images/Image-3.jpeg',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" width="26" height="26">
         <line x1="18" y1="20" x2="18" y2="10"/>

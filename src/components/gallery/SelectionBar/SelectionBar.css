@@ -1,0 +1,108 @@
+.selbar-wrap {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  width: calc(100% - 2 * var(--px));
+  max-width: 640px;
+}
+
+.selbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #1c1c1c;
+  border: 1px solid #2e2e2e;
+  border-radius: 12px;
+  padding: 0.9rem 1.25rem;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(16px);
+}
+
+.selbar-count {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.selbar-num {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: white;
+  letter-spacing: 0.04em;
+}
+
+.selbar-label {
+  font-size: 0.75rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.selbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.selbar-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: none;
+  border-radius: 7px;
+  font-family: var(--font);
+  font-size: 0.73rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  padding: 0.55rem 0.9rem;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.selbar-btn--primary {
+  background: var(--red);
+  color: white;
+}
+.selbar-btn--primary:hover {
+  background: #a80e0e;
+}
+
+.selbar-btn--fav {
+  background: #2a2a2a;
+  color: #ccc;
+}
+.selbar-btn--fav:hover {
+  background: #3a1111;
+  color: #ff6b6b;
+}
+
+.selbar-btn--clear {
+  background: #222;
+  color: #666;
+}
+.selbar-btn--clear:hover {
+  background: #2a2a2a;
+  color: #aaa;
+}
+
+@media (max-width: 480px) {
+  .selbar-inner {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .selbar-count {
+    align-self: flex-start;
+  }
+  .selbar-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+  .selbar-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}

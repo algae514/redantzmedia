@@ -1,0 +1,48 @@
+.es-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem var(--px);
+  gap: 1rem;
+}
+
+.es-icon {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.es-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: #444;
+  letter-spacing: 0.06em;
+}
+
+.es-desc {
+  font-size: 0.85rem;
+  color: #444;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+.es-action {
+  margin-top: 0.75rem;
+  background: none;
+  border: 1px solid #333;
+  color: #888;
+  font-family: var(--font);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.5rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.es-action:hover {
+  border-color: #666;
+  color: #ccc;
+}

@@ -1,0 +1,362 @@
+.cl-root {
+  min-height: 100vh;
+  background: #0A0A0A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 5rem var(--px) 2rem;
+}
+
+/* ── Blurred bg ── */
+.cl-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.cl-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(24px) brightness(0.25) saturate(0.6);
+  transform: scale(1.06);
+}
+
+.cl-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+/* ── Top bar ── */
+.cl-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 1.4rem var(--px);
+}
+
+.cl-logo {
+  height: 28px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.65;
+}
+
+/* ── Card ── */
+.cl-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 420px;
+  background: rgba(12, 12, 12, 0.88);
+  border: 1px solid #202020;
+  border-radius: 18px;
+  padding: 2.5rem 2.25rem;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 24px 80px rgba(0, 0, 0, 0.7);
+}
+
+/* ── Lock icon ── */
+.cl-lock-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.cl-lock-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #161616;
+  border: 1px solid #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+}
+
+/* ── Gallery info ── */
+.cl-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.cl-title {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.6rem;
+}
+
+.cl-couple {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: white;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+
+.cl-event {
+  font-size: 0.72rem;
+  color: #444;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Form ── */
+.cl-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cl-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.cl-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.cl-input {
+  width: 100%;
+  background: #111;
+  border: 1px solid #252525;
+  border-radius: 8px;
+  color: white;
+  font-family: var(--font);
+  font-size: 0.88rem;
+  padding: 0.75rem 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cl-input::placeholder {
+  color: #333;
+}
+
+.cl-input:focus {
+  border-color: #3a3a3a;
+  box-shadow: 0 0 0 3px rgba(200, 16, 16, 0.1);
+}
+
+.cl-input--pwd {
+  padding-right: 2.8rem;
+}
+
+/* ── Password field ── */
+.cl-pwd-wrap {
+  position: relative;
+}
+
+.cl-pwd-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #444;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.cl-pwd-toggle:hover {
+  color: #aaa;
+}
+
+/* ── Error ── */
+.cl-error {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  color: #ff6b6b;
+  background: rgba(200, 16, 16, 0.1);
+  border: 1px solid rgba(200, 16, 16, 0.2);
+  border-radius: 7px;
+  padding: 0.65rem 0.85rem;
+}
+
+/* ── Submit button ── */
+.cl-submit {
+  width: 100%;
+  background: var(--red);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.cl-submit:hover:not(:disabled) {
+  background: #a80e0e;
+}
+
+.cl-submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.cl-submit--loading {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.cl-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: cl-spin 0.65s linear infinite;
+}
+
+@keyframes cl-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Demo credentials box ── */
+.cl-demo-box {
+  background: #0d0d0d;
+  border: 1px solid #1e1e1e;
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
+.cl-demo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.cl-demo-tag {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #4a9e6a;
+  background: rgba(74, 158, 106, 0.1);
+  border: 1px solid rgba(74, 158, 106, 0.2);
+  border-radius: 20px;
+  padding: 0.18rem 0.55rem;
+}
+
+.cl-demo-fill {
+  background: none;
+  border: none;
+  font-family: var(--font);
+  font-size: 0.68rem;
+  color: #555;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.cl-demo-fill:hover {
+  color: #aaa;
+}
+
+.cl-demo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0;
+}
+
+.cl-demo-key {
+  font-size: 0.65rem;
+  color: #444;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  min-width: 60px;
+}
+
+.cl-demo-val {
+  font-family: 'Courier New', monospace;
+  font-size: 0.76rem;
+  color: #888;
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 5px;
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  position: relative;
+  user-select: none;
+}
+
+.cl-demo-val:hover {
+  color: #bbb;
+  border-color: #333;
+}
+
+.cl-copied {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6rem;
+  color: #4a9e6a;
+  background: #0d0d0d;
+  border: 1px solid #1e3329;
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: var(--font);
+  letter-spacing: 0.05em;
+}
+
+/* ── Footer note ── */
+.cl-footer-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.66rem;
+  color: #2e2e2e;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .cl-card {
+    padding: 2rem 1.5rem;
+    border-radius: 14px;
+  }
+}

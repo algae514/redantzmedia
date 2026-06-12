@@ -1,0 +1,173 @@
+.gh-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 580px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #0A0A0A;
+}
+
+/* ── Background ── */
+.gh-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.gh-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: gh-kenBurns 14s ease-out forwards;
+  transform-origin: center center;
+}
+
+@keyframes gh-kenBurns {
+  from { transform: scale(1.1); }
+  to   { transform: scale(1.0); }
+}
+
+.gh-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.15) 45%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+}
+
+/* ── Top bar ── */
+.gh-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.75rem var(--px);
+}
+
+.gh-logo-img {
+  height: 36px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+
+.gh-contact-btn {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 0.55rem 1.2rem;
+  border-radius: 2px;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.gh-contact-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Center content ── */
+.gh-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: white;
+  padding: 0 var(--px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.gh-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.gh-names {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 9vw, 8rem);
+  color: #ffffff;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  margin: 0;
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
+}
+
+.gh-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.gh-dot {
+  opacity: 0.45;
+}
+
+.gh-photographer {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.38);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Scroll indicator ── */
+.gh-scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.gh-scroll-text {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .gh-topbar {
+    padding: 1.25rem var(--px);
+  }
+
+  .gh-logo-img {
+    height: 28px;
+  }
+
+  .gh-contact-btn {
+    font-size: 0.65rem;
+    padding: 0.45rem 0.9rem;
+  }
+
+  .gh-names {
+    font-size: clamp(2.6rem, 12vw, 4rem);
+  }
+}

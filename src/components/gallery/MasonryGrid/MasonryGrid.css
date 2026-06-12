@@ -1,0 +1,172 @@
+.mg-root {
+  padding: 0 var(--px);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+/* ── Photo cell ── */
+.mg-cell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  cursor: pointer;
+  background: #1a1a1a;
+}
+
+/* ── Blur-up placeholder ── */
+.mg-blur-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(14px);
+  transform: scale(1.08);
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mg-blur-thumb--hidden {
+  opacity: 0;
+}
+
+/* ── Full image ── */
+.mg-img {
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.mg-img--loaded {
+  opacity: 1;
+}
+
+.mg-cell:hover .mg-img {
+  transform: scale(1.05);
+}
+
+/* ── Hover overlay ── */
+.mg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+  z-index: 5;
+}
+
+.mg-cell:hover .mg-overlay {
+  background: rgba(0, 0, 0, 0.38);
+}
+
+.mg-view-icon {
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.28s, transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mg-cell:hover .mg-view-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Client action buttons (top-right) ── */
+.mg-actions {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  z-index: 10;
+  display: flex;
+  gap: 0.3rem;
+  opacity: 0;
+  transition: opacity 0.22s;
+}
+
+.mg-cell:hover .mg-actions {
+  opacity: 1;
+}
+
+.mg-action-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  backdrop-filter: blur(6px);
+}
+
+.mg-action-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.12);
+}
+
+.mg-fav-btn--active {
+  background: rgba(200, 16, 16, 0.28);
+  border-color: rgba(200, 16, 16, 0.75);
+}
+
+/* ── Selection checkbox (top-left) ── */
+.mg-checkbox {
+  position: absolute;
+  top: 0.55rem;
+  left: 0.55rem;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.mg-checkbox input {
+  display: none;
+}
+
+.mg-checkbox-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, border-color 0.18s;
+  backdrop-filter: blur(4px);
+}
+
+.mg-checkbox--checked .mg-checkbox-box {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+/* ── Selected state ── */
+.mg-selected-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(200, 16, 16, 0.12);
+  border: 2px solid var(--red);
+  pointer-events: none;
+  z-index: 4;
+  border-radius: 3px;
+}
+
+.mg-cell--selected .mg-img {
+  transform: scale(0.97);
+}

@@ -1,0 +1,72 @@
+export const GALLERY_META = {
+  slug: 'sunil-thriveni',
+  coupleNames: 'Sunil & Thriveni',
+  subtitle: 'Wedding Story',
+  date: 'December 24, 2025',
+  location: 'Visakhapatnam, India',
+  heroImage: '/images/Slide-1.png',
+  totalPhotos: 400,
+  photographer: 'RedAntz Studios',
+};
+
+export const CATEGORIES = [
+  { id: 'all',         label: 'All' },
+  { id: 'pre-wedding', label: 'Pre Wedding' },
+  { id: 'wedding',     label: 'Wedding' },
+  { id: 'reception',   label: 'Reception' },
+  { id: 'haldi',       label: 'Haldi' },
+  { id: 'mehendi',     label: 'Mehendi' },
+  { id: 'family',      label: 'Family' },
+  { id: 'candid',      label: 'Candid' },
+];
+
+// Replace src / thumb / width / height with real CDN paths when integrating a backend.
+// thumb: low-res placeholder (~40px wide) for blur-up progressive loading.
+const p = (id, category, w, h) => ({
+  id,
+  src: `https://picsum.photos/seed/ra${id}/${w}/${h}`,
+  thumb: `https://picsum.photos/seed/ra${id}/40/${Math.round((40 * h) / w)}`,
+  width: w,
+  height: h,
+  category,
+  alt: `${category} photo ${id}`,
+});
+
+export const PHOTOS = [
+  p(1,  'wedding',     1200, 1800),
+  p(2,  'pre-wedding', 1200, 800),
+  p(3,  'wedding',     800,  1200),
+  p(4,  'haldi',       1200, 900),
+  p(5,  'wedding',     900,  1300),
+  p(6,  'mehendi',     1000, 1400),
+  p(7,  'reception',   1200, 800),
+  p(8,  'pre-wedding', 800,  1200),
+  p(9,  'candid',      1200, 900),
+  p(10, 'family',      1200, 1100),
+  p(11, 'wedding',     850,  1300),
+  p(12, 'haldi',       1200, 850),
+  p(13, 'reception',   800,  1200),
+  p(14, 'candid',      1200, 800),
+  p(15, 'pre-wedding', 900,  1400),
+  p(16, 'mehendi',     1200, 950),
+  p(17, 'family',      950,  1250),
+  p(18, 'wedding',     1200, 800),
+  p(19, 'reception',   1000, 1400),
+  p(20, 'candid',      1200, 900),
+  p(21, 'wedding',     820,  1200),
+  p(22, 'haldi',       1200, 1800),
+  p(23, 'family',      1200, 820),
+  p(24, 'mehendi',     900,  1250),
+  p(25, 'pre-wedding', 1200, 800),
+  p(26, 'wedding',     800,  1200),
+  p(27, 'reception',   1200, 900),
+  p(28, 'candid',      1100, 1400),
+  p(29, 'family',      1200, 800),
+  p(30, 'wedding',     900,  1300),
+  p(31, 'haldi',       1200, 800),
+  p(32, 'reception',   800,  1200),
+  p(33, 'pre-wedding', 1200, 900),
+  p(34, 'candid',      1000, 1300),
+  p(35, 'mehendi',     1200, 800),
+  p(36, 'wedding',     900,  1200),
+];

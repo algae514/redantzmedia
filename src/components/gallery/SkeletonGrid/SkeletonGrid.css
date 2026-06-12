@@ -1,0 +1,32 @@
+.sk-root {
+  padding: 0 var(--px);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.sk-grid {
+  columns: 3;
+  column-gap: 6px;
+}
+
+.sk-item {
+  break-inside: avoid;
+  margin-bottom: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #1a1a1a 25%, #242424 50%, #1a1a1a 75%);
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes sk-shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@media (max-width: 900px) {
+  .sk-grid { columns: 2; }
+}
+
+@media (max-width: 540px) {
+  .sk-grid { columns: 1; }
+}

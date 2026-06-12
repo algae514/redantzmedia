@@ -10,27 +10,37 @@ import WeddingQuotation from './pages/WeddingQuotation';
 import Studios from './pages/Studios';
 import Media from './pages/Media';
 import Digitals from './pages/Digitals';
+import PortfolioGallery from './pages/PortfolioGallery/PortfolioGallery';
+import ClientGallery from './pages/ClientGallery/ClientGallery';
 
 function AppShell() {
   const { pathname } = useLocation();
-  const isHome = pathname === '/' || pathname === '/home';
+  const isHome      = pathname === '/' || pathname === '/home';
+  const isGalleryPage = pathname.startsWith('/portfolio') || pathname.startsWith('/client');
+  const isFullPage  = isHome || isGalleryPage;
 
   return (
     <div className="app-shell">
-      {!isHome && <Header />}
-      <main className={isHome ? 'main-full' : 'main-content'}>
+      {!isFullPage && <Header />}
+      <main className={isFullPage ? 'main-full' : 'main-content'}>
         <Routes>
-          <Route path="/"                   element={<Home />} />
-          <Route path="/home"               element={<Home2 />} />
-          <Route path="/studios"            element={<Studios />} />
-          <Route path="/media"              element={<Media />} />
-          <Route path="/digitals"           element={<Digitals />} />
-          <Route path="/about"              element={<About />} />
-          <Route path="/contact"            element={<Contact />} />
-          <Route path="/wedding-quotation"  element={<WeddingQuotation />} />
+          <Route path="/"                       element={<Home />} />
+          <Route path="/home"                   element={<Home2 />} />
+          <Route path="/studios"                element={<Studios />} />
+          <Route path="/media"                  element={<Media />} />
+          <Route path="/digitals"               element={<Digitals />} />
+          <Route path="/about"                  element={<About />} />
+          <Route path="/contact"                element={<Contact />} />
+          <Route path="/wedding-quotation"      element={<WeddingQuotation />} />
+          {/* Gallery pages — own header/nav, no site header */}
+          <Route path="/portfolio/:slug"        element={<PortfolioGallery />} />
+          <Route path="/portfolio"              element={<PortfolioGallery />} />
+          <Route path="/client/:galleryId"      element={<ClientGallery />} />
+          <Route path="/client"                 element={<ClientGallery />} />
         </Routes>
       </main>
-      <Footer />
+      {/* Hide footer on standalone client gallery */}
+      {!pathname.startsWith('/client') && <Footer />}
     </div>
   );
 }

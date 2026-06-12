@@ -1,0 +1,137 @@
+.gcta-section {
+  position: relative;
+  background: #0A0A0A;
+  padding: 8rem var(--px);
+  text-align: center;
+  overflow: hidden;
+}
+
+.gcta-bg-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 1px solid #1a1a1a;
+  pointer-events: none;
+}
+
+.gcta-bg-line::before,
+.gcta-bg-line::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid #161616;
+}
+
+.gcta-bg-line::before {
+  inset: -80px;
+}
+
+.gcta-bg-line::after {
+  inset: -160px;
+}
+
+.gcta-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.gcta-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.gcta-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  color: white;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+}
+
+.gcta-sub {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.75;
+  max-width: 520px;
+}
+
+.gcta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.gcta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.9rem 1.8rem;
+  border-radius: 3px;
+  transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.2s;
+}
+
+.gcta-btn:hover {
+  transform: translateY(-2px);
+}
+
+.gcta-btn--primary {
+  background: var(--red);
+  color: white;
+}
+.gcta-btn--primary:hover {
+  background: #a80e0e;
+}
+
+.gcta-btn--outline {
+  background: transparent;
+  color: white;
+  border: 1px solid #333;
+}
+.gcta-btn--outline:hover {
+  border-color: #666;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.gcta-btn--whatsapp {
+  background: #1a4a2a;
+  color: #4ade80;
+  border: 1px solid #1d6338;
+}
+.gcta-btn--whatsapp:hover {
+  background: #1e5530;
+}
+
+@media (max-width: 640px) {
+  .gcta-section {
+    padding: 5rem var(--px);
+  }
+
+  .gcta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gcta-btn {
+    justify-content: center;
+  }
+}

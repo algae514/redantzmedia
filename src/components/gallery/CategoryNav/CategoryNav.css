@@ -1,0 +1,97 @@
+.cn-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #0a0a0a;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.cn-inner {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 var(--px);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.cn-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.cn-tab {
+  position: relative;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: #555;
+  font-family: var(--font);
+  font-size: 0.73rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1.05rem 1.1rem;
+  cursor: pointer;
+  transition: color 0.22s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.cn-tab:hover {
+  color: #aaa;
+}
+
+.cn-tab--active {
+  color: #ffffff;
+}
+
+/* ── Count badge ── */
+.cn-count {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: #3a3a3a;
+  background: #181818;
+  border: 1px solid #252525;
+  border-radius: 20px;
+  padding: 0.1rem 0.42rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  transition: background 0.22s, color 0.22s, border-color 0.22s;
+  min-width: 20px;
+  text-align: center;
+}
+
+.cn-count--active {
+  background: #1a0808;
+  color: var(--red);
+  border-color: #2e1111;
+}
+
+/* ── Active underline (Framer Motion) ── */
+.cn-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--red);
+  border-radius: 1px 1px 0 0;
+  display: block;
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .cn-tab {
+    font-size: 0.68rem;
+    padding: 0.9rem 0.9rem;
+    letter-spacing: 0.05em;
+  }
+
+  .cn-count {
+    font-size: 0.58rem;
+    padding: 0.08rem 0.35rem;
+  }
+}

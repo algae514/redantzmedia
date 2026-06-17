@@ -67,7 +67,7 @@ export default function PortfolioGallery() {
   const activeLabel = categories.find((c) => c.id === activeCategory)?.label || 'All';
 
   return (
-    <div className="pg-root">
+    <div className="pg-root" data-theme="light">
       <SEO seo={{
         title:       `${meta.coupleNames} | Wedding Gallery | RedAntz Studios`,
         description: `${meta.coupleNames} wedding photography by RedAntz Studios — ${meta.date}, ${meta.location}`,

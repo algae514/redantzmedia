@@ -1,6 +1,6 @@
 .cl-root {
   min-height: 100vh;
-  background: #0A0A0A;
+  background: #f8f8f8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,7 @@
   padding: 5rem var(--px) 2rem;
 }
 
-/* ── Blurred bg ── */
+/* ── Subtle blurred bg (light wash) ── */
 .cl-bg {
   position: fixed;
   inset: 0;
@@ -19,31 +19,32 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(24px) brightness(0.25) saturate(0.6);
+  filter: blur(28px) brightness(1.1) saturate(0.35);
   transform: scale(1.06);
 }
 
 .cl-bg-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(248, 248, 248, 0.88);
 }
 
-/* ── Top bar ── */
+/* ── Top logo bar ── */
 .cl-topbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 20;
-  padding: 1.4rem var(--px);
+  padding: 1.25rem var(--px);
+  background: #ffffff;
+  border-bottom: 1px solid #efefef;
 }
 
 .cl-logo {
   height: 28px;
   width: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.65;
+  display: block;
 }
 
 /* ── Card ── */
@@ -52,15 +53,13 @@
   z-index: 10;
   width: 100%;
   max-width: 420px;
-  background: rgba(12, 12, 12, 0.88);
-  border: 1px solid #202020;
+  background: #ffffff;
+  border: 1px solid #ebebeb;
   border-radius: 18px;
   padding: 2.5rem 2.25rem;
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
   box-shadow:
-    0 0 0 1px rgba(255,255,255,0.03),
-    0 24px 80px rgba(0, 0, 0, 0.7);
+    0 1px 3px rgba(0,0,0,0.05),
+    0 12px 48px rgba(0,0,0,0.09);
 }
 
 /* ── Lock icon ── */
@@ -74,12 +73,12 @@
   width: 48px;
   height: 48px;
   border-radius: 14px;
-  background: #161616;
-  border: 1px solid #2a2a2a;
+  background: #f5f5f5;
+  border: 1px solid #e8e8e8;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #555;
+  color: #bbb;
 }
 
 /* ── Gallery info ── */
@@ -100,7 +99,7 @@
 .cl-couple {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 4vw, 2rem);
-  color: white;
+  color: #111;
   letter-spacing: 0.06em;
   line-height: 1.1;
   margin-bottom: 0.4rem;
@@ -108,7 +107,7 @@
 
 .cl-event {
   font-size: 0.72rem;
-  color: #444;
+  color: #aaa;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -129,32 +128,34 @@
 
 .cl-label {
   font-size: 0.68rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #555;
+  color: #888;
 }
 
 .cl-input {
   width: 100%;
-  background: #111;
-  border: 1px solid #252525;
+  box-sizing: border-box;
+  background: #f7f7f7;
+  border: 1px solid #e4e4e4;
   border-radius: 8px;
-  color: white;
+  color: #111;
   font-family: var(--font);
   font-size: 0.88rem;
   padding: 0.75rem 0.95rem;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .cl-input::placeholder {
-  color: #333;
+  color: #ccc;
 }
 
 .cl-input:focus {
-  border-color: #3a3a3a;
-  box-shadow: 0 0 0 3px rgba(200, 16, 16, 0.1);
+  background: #fff;
+  border-color: #c0c0c0;
+  box-shadow: 0 0 0 3px rgba(200, 16, 16, 0.07);
 }
 
 .cl-input--pwd {
@@ -173,7 +174,7 @@
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #444;
+  color: #ccc;
   cursor: pointer;
   padding: 0.25rem;
   transition: color 0.2s;
@@ -182,7 +183,7 @@
 }
 
 .cl-pwd-toggle:hover {
-  color: #aaa;
+  color: #888;
 }
 
 /* ── Error ── */
@@ -191,9 +192,9 @@
   align-items: center;
   gap: 0.45rem;
   font-size: 0.78rem;
-  color: #ff6b6b;
-  background: rgba(200, 16, 16, 0.1);
-  border: 1px solid rgba(200, 16, 16, 0.2);
+  color: #c81010;
+  background: rgba(200, 16, 16, 0.06);
+  border: 1px solid rgba(200, 16, 16, 0.15);
   border-radius: 7px;
   padding: 0.65rem 0.85rem;
 }
@@ -236,7 +237,7 @@
 .cl-spinner {
   width: 14px;
   height: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.35);
   border-top-color: white;
   border-radius: 50%;
   animation: cl-spin 0.65s linear infinite;
@@ -248,8 +249,8 @@
 
 /* ── Demo credentials box ── */
 .cl-demo-box {
-  background: #0d0d0d;
-  border: 1px solid #1e1e1e;
+  background: #f8f8f8;
+  border: 1px solid #ebebeb;
   border-radius: 10px;
   padding: 1rem 1.1rem;
   margin-bottom: 1.25rem;
@@ -267,9 +268,9 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #4a9e6a;
-  background: rgba(74, 158, 106, 0.1);
-  border: 1px solid rgba(74, 158, 106, 0.2);
+  color: #3a8a5c;
+  background: rgba(58, 138, 92, 0.08);
+  border: 1px solid rgba(58, 138, 92, 0.18);
   border-radius: 20px;
   padding: 0.18rem 0.55rem;
 }
@@ -279,7 +280,7 @@
   border: none;
   font-family: var(--font);
   font-size: 0.68rem;
-  color: #555;
+  color: #aaa;
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -287,7 +288,7 @@
 }
 
 .cl-demo-fill:hover {
-  color: #aaa;
+  color: #555;
 }
 
 .cl-demo-row {
@@ -299,7 +300,7 @@
 
 .cl-demo-key {
   font-size: 0.65rem;
-  color: #444;
+  color: #bbb;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   min-width: 60px;
@@ -308,20 +309,23 @@
 .cl-demo-val {
   font-family: 'Courier New', monospace;
   font-size: 0.76rem;
-  color: #888;
-  background: #151515;
-  border: 1px solid #222;
+  color: #555;
+  background: #eeeeee;
+  border: 1px solid #e0e0e0;
   border-radius: 5px;
   padding: 0.2rem 0.55rem;
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
   position: relative;
   user-select: none;
+  word-break: break-all;
+  min-width: 0;
 }
 
 .cl-demo-val:hover {
-  color: #bbb;
-  border-color: #333;
+  color: #222;
+  border-color: #bbb;
+  background: #e8e8e8;
 }
 
 .cl-copied {
@@ -330,9 +334,9 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.6rem;
-  color: #4a9e6a;
-  background: #0d0d0d;
-  border: 1px solid #1e3329;
+  color: #3a8a5c;
+  background: #fff;
+  border: 1px solid #c8e6d4;
   border-radius: 4px;
   padding: 0.15rem 0.4rem;
   white-space: nowrap;
@@ -348,15 +352,83 @@
   justify-content: center;
   gap: 0.4rem;
   font-size: 0.66rem;
-  color: #2e2e2e;
+  color: #ccc;
   letter-spacing: 0.05em;
   text-align: center;
 }
 
 /* ── Mobile ── */
 @media (max-width: 480px) {
+  .cl-root {
+    padding: 5.5rem var(--px) 3rem;
+    align-items: flex-start;
+    min-height: 100svh;
+  }
+
+  .cl-topbar {
+    padding: 0.9rem var(--px);
+  }
+
+  .cl-logo {
+    height: 22px;
+  }
+
   .cl-card {
-    padding: 2rem 1.5rem;
+    padding: 1.75rem 1.25rem 1.5rem;
     border-radius: 14px;
+  }
+
+  .cl-lock-wrap {
+    margin-bottom: 1.1rem;
+  }
+
+  .cl-lock-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .cl-header {
+    margin-bottom: 1.35rem;
+  }
+
+  .cl-couple {
+    font-size: clamp(1.3rem, 6vw, 1.65rem);
+  }
+
+  .cl-form {
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .cl-input {
+    font-size: 16px; /* prevents iOS auto-zoom on focus */
+    padding: 0.7rem 0.85rem;
+  }
+
+  .cl-input--pwd {
+    padding-right: 2.6rem;
+  }
+
+  .cl-demo-box {
+    padding: 0.85rem 1rem;
+  }
+
+  .cl-demo-row {
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+  }
+
+  .cl-demo-key {
+    min-width: 56px;
+    font-size: 0.62rem;
+  }
+
+  .cl-demo-val {
+    font-size: 0.7rem;
+  }
+
+  .cl-submit {
+    padding: 0.85rem;
+    font-size: 0.78rem;
   }
 }

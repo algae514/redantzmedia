@@ -17,10 +17,23 @@
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 
+[data-theme="light"] .btt-btn {
+  background: #ffffff;
+  border-color: #ddd;
+  color: #888;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
 .btt-btn:hover {
   background: #242424;
   border-color: #444;
   color: white;
+}
+
+[data-theme="light"] .btt-btn:hover {
+  background: #f5f5f5;
+  border-color: #aaa;
+  color: #333;
 }
 
 @media (max-width: 640px) {

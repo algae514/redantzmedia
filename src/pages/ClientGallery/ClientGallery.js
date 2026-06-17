@@ -158,7 +158,7 @@ export default function ClientGallery() {
   }
 
   return (
-    <div className="cg-root">
+    <div className="cg-root" data-theme="light">
       <ClientHeader meta={meta} onDownloadAll={() => alert('Download all: connect to backend API.')} onLogout={handleLogout} />
 
       {/* Toolbar */}

@@ -10,13 +10,15 @@ import WeddingQuotation from './pages/WeddingQuotation';
 import Studios from './pages/Studios';
 import Media from './pages/Media';
 import Digitals from './pages/Digitals';
+import PortfolioList from './pages/PortfolioList/PortfolioList';
 import PortfolioGallery from './pages/PortfolioGallery/PortfolioGallery';
 import ClientGallery from './pages/ClientGallery/ClientGallery';
 
 function AppShell() {
   const { pathname } = useLocation();
   const isHome      = pathname === '/' || pathname === '/home';
-  const isGalleryPage = pathname.startsWith('/portfolio') || pathname.startsWith('/client');
+  // /portfolio (list page) shows site header; /portfolio/:slug (individual gallery) does not
+  const isGalleryPage = /^\/portfolio\/.+/.test(pathname) || pathname.startsWith('/client');
   const isFullPage  = isHome || isGalleryPage;
 
   return (
@@ -32,9 +34,9 @@ function AppShell() {
           <Route path="/about"                  element={<About />} />
           <Route path="/contact"                element={<Contact />} />
           <Route path="/wedding-quotation"      element={<WeddingQuotation />} />
-          {/* Gallery pages — own header/nav, no site header */}
+          {/* Portfolio list (with site header) and individual gallery (own header) */}
+          <Route path="/portfolio"              element={<PortfolioList />} />
           <Route path="/portfolio/:slug"        element={<PortfolioGallery />} />
-          <Route path="/portfolio"              element={<PortfolioGallery />} />
           <Route path="/client/:galleryId"      element={<ClientGallery />} />
           <Route path="/client"                 element={<ClientGallery />} />
         </Routes>

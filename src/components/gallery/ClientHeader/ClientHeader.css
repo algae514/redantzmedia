@@ -3,6 +3,11 @@
   border-bottom: 1px solid #1a1a1a;
 }
 
+[data-theme="light"] .clhdr-root {
+  background: #ffffff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
 /* ── Top bar ── */
 .clhdr-topbar {
   display: flex;
@@ -14,11 +19,14 @@
   margin: 0 auto;
 }
 
+[data-theme="light"] .clhdr-topbar {
+  border-bottom: 1px solid #f0f0f0;
+}
+
 .clhdr-logo {
-  height: 32px;
+  height: 30px;
   width: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.85;
+  display: block;
 }
 
 .clhdr-topbar-right {
@@ -66,9 +74,19 @@
   transition: border-color 0.2s, color 0.2s;
 }
 
+[data-theme="light"] .clhdr-logout {
+  border-color: #e0e0e0;
+  color: #aaa;
+}
+
 .clhdr-logout:hover {
   border-color: #444;
   color: #aaa;
+}
+
+[data-theme="light"] .clhdr-logout:hover {
+  border-color: #aaa;
+  color: #555;
 }
 
 .clhdr-logout-label {
@@ -94,6 +112,10 @@
   margin-bottom: 0.35rem;
 }
 
+[data-theme="light"] .clhdr-welcome {
+  color: #bbb;
+}
+
 .clhdr-couple {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3.2rem);
@@ -101,6 +123,10 @@
   letter-spacing: 0.06em;
   line-height: 1;
   margin-bottom: 0.9rem;
+}
+
+[data-theme="light"] .clhdr-couple {
+  color: #111;
 }
 
 .clhdr-meta-row {
@@ -112,18 +138,34 @@
   color: #555;
 }
 
+[data-theme="light"] .clhdr-meta-row {
+  color: #888;
+}
+
 .clhdr-event-type {
   color: #888;
   font-weight: 500;
+}
+
+[data-theme="light"] .clhdr-event-type {
+  color: #666;
 }
 
 .clhdr-sep {
   color: #2e2e2e;
 }
 
+[data-theme="light"] .clhdr-sep {
+  color: #ddd;
+}
+
 .clhdr-count {
   color: white;
   font-weight: 600;
+}
+
+[data-theme="light"] .clhdr-count {
+  color: #111;
 }
 
 .clhdr-expiry {
@@ -136,13 +178,60 @@
   letter-spacing: 0.05em;
 }
 
+[data-theme="light"] .clhdr-expiry {
+  color: #bbb;
+}
+
 /* ── Mobile ── */
 @media (max-width: 640px) {
+  .clhdr-topbar {
+    padding: 0.85rem var(--px);
+  }
+
+  .clhdr-logo {
+    height: 24px;
+  }
+
+  .clhdr-topbar-right {
+    gap: 0.45rem;
+  }
+
+  /* Icon-only download button on small screens */
+  .clhdr-dl-all {
+    padding: 0.55rem 0.7rem;
+    gap: 0;
+  }
+
+  .clhdr-dl-label {
+    display: none;
+  }
+
+  .clhdr-logout {
+    padding: 0.55rem 0.65rem;
+  }
+
   .clhdr-info {
-    padding: 1.5rem var(--px) 1.25rem;
+    padding: 1.25rem var(--px) 1rem;
+  }
+
+  .clhdr-couple {
+    font-size: clamp(1.65rem, 7vw, 2.2rem);
+    margin-bottom: 0.65rem;
   }
 
   .clhdr-meta-row {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
+    gap: 0.35rem;
+  }
+
+  .clhdr-expiry {
+    font-size: 0.65rem;
+    margin-top: 0.6rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .clhdr-dl-all {
+    padding: 0.5rem 0.6rem;
   }
 }

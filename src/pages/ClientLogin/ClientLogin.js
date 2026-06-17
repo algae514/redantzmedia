@@ -88,7 +88,7 @@ export default function ClientLogin({ meta, onSuccess }) {
       {/* Top logo */}
       <div className="cl-topbar">
         <a href="/" className="cl-logo-link" aria-label="RedAntz Studios home">
-          <img src="/images/redantz-Logo.png" alt="RedAntz Studios" className="cl-logo" />
+          <img src="/images/logo.png" alt="RedAntz Studios" className="cl-logo" />
         </a>
       </div>
 

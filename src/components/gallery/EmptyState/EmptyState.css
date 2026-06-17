@@ -13,6 +13,10 @@
   margin-bottom: 0.5rem;
 }
 
+[data-theme="light"] .es-icon {
+  color: #ccc;
+}
+
 .es-title {
   font-family: var(--font-display);
   font-size: 1.6rem;
@@ -20,11 +24,19 @@
   letter-spacing: 0.06em;
 }
 
+[data-theme="light"] .es-title {
+  color: #bbb;
+}
+
 .es-desc {
   font-size: 0.85rem;
   color: #444;
   max-width: 320px;
   line-height: 1.6;
+}
+
+[data-theme="light"] .es-desc {
+  color: #bbb;
 }
 
 .es-action {
@@ -42,7 +54,17 @@
   transition: border-color 0.2s, color 0.2s;
 }
 
+[data-theme="light"] .es-action {
+  border-color: #ddd;
+  color: #bbb;
+}
+
 .es-action:hover {
   border-color: #666;
   color: #ccc;
+}
+
+[data-theme="light"] .es-action:hover {
+  border-color: #999;
+  color: #666;
 }

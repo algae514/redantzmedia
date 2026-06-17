@@ -6,6 +6,12 @@
   border-bottom: 1px solid #1e1e1e;
 }
 
+[data-theme="light"] .cn-nav {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid #efefef;
+  backdrop-filter: blur(12px);
+}
+
 .cn-inner {
   display: flex;
   align-items: center;
@@ -40,12 +46,24 @@
   gap: 0.45rem;
 }
 
+[data-theme="light"] .cn-tab {
+  color: #aaa;
+}
+
 .cn-tab:hover {
   color: #aaa;
 }
 
+[data-theme="light"] .cn-tab:hover {
+  color: #555;
+}
+
 .cn-tab--active {
   color: #ffffff;
+}
+
+[data-theme="light"] .cn-tab--active {
+  color: #111;
 }
 
 /* ── Count badge ── */
@@ -64,10 +82,22 @@
   text-align: center;
 }
 
+[data-theme="light"] .cn-count {
+  color: #bbb;
+  background: #f4f4f4;
+  border-color: #e8e8e8;
+}
+
 .cn-count--active {
   background: #1a0808;
   color: var(--red);
   border-color: #2e1111;
+}
+
+[data-theme="light"] .cn-count--active {
+  background: #fff0f0;
+  color: var(--red);
+  border-color: #ffd5d5;
 }
 
 /* ── Active underline (Framer Motion) ── */
@@ -86,12 +116,24 @@
 @media (max-width: 640px) {
   .cn-tab {
     font-size: 0.68rem;
-    padding: 0.9rem 0.9rem;
+    padding: 0.85rem 0.85rem;
     letter-spacing: 0.05em;
   }
 
   .cn-count {
-    font-size: 0.58rem;
-    padding: 0.08rem 0.35rem;
+    font-size: 0.56rem;
+    padding: 0.07rem 0.32rem;
+    min-width: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .cn-tab {
+    font-size: 0.64rem;
+    padding: 0.8rem 0.7rem;
+  }
+
+  .cn-count {
+    display: none;
   }
 }

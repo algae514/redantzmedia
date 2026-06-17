@@ -13,6 +13,10 @@
   background: #1a1a1a;
 }
 
+[data-theme="light"] .mg-cell {
+  background: #ececec;
+}
+
 /* ── Blur-up placeholder ── */
 .mg-blur-thumb {
   position: absolute;

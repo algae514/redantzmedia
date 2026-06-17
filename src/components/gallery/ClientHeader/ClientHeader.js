@@ -5,7 +5,7 @@ export default function ClientHeader({ meta, onDownloadAll, onLogout }) {
     <header className="clhdr-root">
       <div className="clhdr-topbar">
         <a href="/" className="clhdr-logo-link" aria-label="RedAntz Studios">
-          <img src="/images/redantz-Logo.png" alt="RedAntz Studios" className="clhdr-logo" />
+          <img src="/images/logo.png" alt="RedAntz Studios" className="clhdr-logo" />
         </a>
         <div className="clhdr-topbar-right">
           <button className="clhdr-dl-all" onClick={onDownloadAll}>
@@ -14,7 +14,7 @@ export default function ClientHeader({ meta, onDownloadAll, onLogout }) {
               <polyline points="7 10 12 15 17 10"/>
               <line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
-            Download All
+            <span className="clhdr-dl-label">Download All</span>
           </button>
           {onLogout && (
             <button className="clhdr-logout" onClick={onLogout} title="Sign out">

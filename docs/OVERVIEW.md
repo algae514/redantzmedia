@@ -1,8 +1,10 @@
 # RedAntz Media — Product Overview
 
 **Live site:** [https://www.redantzmedia.com](https://www.redantzmedia.com)  
-**Repo:** Create React App (React 19) + React Router  
-**Last reviewed:** August 2026
+**Repo:** [github.com/algae514/redantzmedia](https://github.com/algae514/redantzmedia)  
+**Stack:** Create React App (React 19) + React Router  
+**Hosting:** GitHub Pages (free) — see [HOSTING.md](./HOSTING.md)  
+**Last reviewed:** September 2026
 
 ---
 
@@ -23,7 +25,7 @@ The product has two sides:
 1. **Public marketing site** — brand homepage, division pages, portfolio browsing, contact / quotation flows.
 2. **Client delivery gallery** — password-protected private galleries where couples/clients can browse, favourite, select, and (eventually) download their photos.
 
-There is **no backend yet**. Pages and galleries run on static / mock data (`picsum.photos` placeholders, hardcoded credentials, localStorage for favourites and auth flags).
+There is **no backend yet**. Pages and galleries run on static / mock data (`picsum.photos` placeholders, hardcoded credentials, localStorage for favourites and auth flags). Client “login” is browser-only (not server-side auth).
 
 ---
 
@@ -46,6 +48,13 @@ There is **no backend yet**. Pages and galleries run on static / mock data (`pic
 ---
 
 ## What is completed
+
+### Hosting & delivery
+- Public repo under `algae514/redantzmedia`
+- GitHub Pages + Actions CI/CD on every push to `main`
+- Custom domain `www.redantzmedia.com` (apex DNS pointed at GitHub Pages A records)
+- SPA `404.html` fallback for client-side routes
+- Docs: [HOSTING.md](./HOSTING.md)
 
 ### Marketing homepage (`/`)
 - Full-screen hero slider for Studios / Media / Digitals (Ken Burns, autoplay, dots)
@@ -71,7 +80,7 @@ There is **no backend yet**. Pages and galleries run on static / mock data (`pic
 
 ### Client gallery (private delivery UX)
 - Login screen with branded card, show/hide password, demo credentials UI
-- Auth gate persisted in `localStorage` per gallery id
+- Auth gate persisted in `localStorage` per gallery id (**not** server-side)
 - Category filters, search, favourites-only view
 - Favourites persisted in `localStorage`
 - Multi-select + selection bar (favourite selected / download selected — download is stubbed)
@@ -118,10 +127,10 @@ Reusable pieces under `src/components/gallery/`:
 ### Engineering / polish
 - Choose one homepage (`/` vs `/home`) and remove or clearly deprecate the other
 - Remove demo credentials UI from client login before production
-- Real README for the project (current README is default CRA boilerplate)
 - Tests beyond the CRA smoke test
 - Production env config, error boundaries, 404 page
 - Accessibility / performance pass on large galleries (lazy load is partial; real CDN sizing needed)
+- Confirm apex `https://redantzmedia.com` HTTPS cert / GitHub DNS check fully green (www already live)
 
 ---
 
@@ -142,3 +151,4 @@ Reusable pieces under `src/components/gallery/`:
 - react-photo-album, yet-another-react-lightbox
 - react-helmet-async (SEO)
 - Static assets under `public/images/`
+- Hosting: GitHub Pages + GitHub Actions (see [HOSTING.md](./HOSTING.md))

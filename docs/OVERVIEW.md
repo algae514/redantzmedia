@@ -1,6 +1,6 @@
 # RedAntz Media — Product Overview
 
-**Live site:** [https://www.redantzmedia.com](https://www.redantzmedia.com)  
+**Live site:** [https://redantzmedia.com](https://redantzmedia.com) (www redirects here)  
 **Repo:** [github.com/algae514/redantzmedia](https://github.com/algae514/redantzmedia)  
 **Stack:** Create React App (React 19) + React Router  
 **Hosting:** GitHub Pages (free) — see [HOSTING.md](./HOSTING.md)  
@@ -52,7 +52,7 @@ There is **no backend yet**. Pages and galleries run on static / mock data (`pic
 ### Hosting & delivery
 - Public repo under `algae514/redantzmedia`
 - GitHub Pages + Actions CI/CD on every push to `main`
-- Custom domain `www.redantzmedia.com` (apex DNS pointed at GitHub Pages A records)
+- Custom domain `redantzmedia.com` (www CNAME + apex A records → GitHub Pages)
 - SPA `404.html` fallback for client-side routes
 - Docs: [HOSTING.md](./HOSTING.md)
 
@@ -130,7 +130,7 @@ Reusable pieces under `src/components/gallery/`:
 - Tests beyond the CRA smoke test
 - Production env config, error boundaries, 404 page
 - Accessibility / performance pass on large galleries (lazy load is partial; real CDN sizing needed)
-- Confirm apex `https://redantzmedia.com` HTTPS cert / GitHub DNS check fully green (www already live)
+- Confirm GitHub Pages certificate includes `redantzmedia.com` (fix `NET::ERR_CERT_COMMON_NAME_INVALID` on apex)
 
 ---
 

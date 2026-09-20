@@ -2,7 +2,7 @@
 
 Marketing and client-gallery website for **RedAntz Media** (Studios · Media · Digitals).
 
-- **Live:** [https://www.redantzmedia.com](https://www.redantzmedia.com)
+- **Live:** [https://redantzmedia.com](https://redantzmedia.com)
 - **Repo:** [algae514/redantzmedia](https://github.com/algae514/redantzmedia)
 
 ## Docs

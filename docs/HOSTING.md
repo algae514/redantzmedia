@@ -1,6 +1,6 @@
 # Hosting — GitHub Pages
 
-**Primary site:** https://www.redantzmedia.com  
+**Primary site:** https://redantzmedia.com (www redirects here)  
 **Repo:** https://github.com/algae514/redantzmedia  
 **DNS registrar:** GoDaddy (`redantzmedia.com`)  
 **Deploy:** every push to `main` → GitHub Actions → Pages  
@@ -17,8 +17,8 @@ Push to main
     → GitHub Pages
 
 Browser
-    → www.redantzmedia.com  (CNAME → algae514.github.io) → Pages
-    → redantzmedia.com      (A → GitHub IPs) → Pages (redirects to www when cert/DNS settled)
+    → redantzmedia.com      (A → GitHub IPs) → Pages (primary custom domain)
+    → www.redantzmedia.com  (CNAME → algae514.github.io) → Pages (GitHub redirects to apex)
 ```
 
 Cost: **$0** for hosting (public repo). Domain renewal is paid to GoDaddy separately.
@@ -51,14 +51,18 @@ Configured in GoDaddy. **Do not change email-related records.**
 
 | Type | Name | Value | Purpose |
 |---|---|---|---|
-| `CNAME` | `www` | `algae514.github.io` | Primary site |
-| `A` | `@` | `185.199.108.153` | Apex → GitHub Pages |
+| `CNAME` | `www` | `algae514.github.io` | www → GitHub (redirects to apex) |
+| `A` | `@` | `185.199.108.153` | Apex → GitHub Pages (primary) |
 | `A` | `@` | `185.199.109.153` | Apex → GitHub Pages |
 | `A` | `@` | `185.199.110.153` | Apex → GitHub Pages |
 | `A` | `@` | `185.199.111.153` | Apex → GitHub Pages |
 
-Repo file [`public/CNAME`](../public/CNAME) contains: `www.redantzmedia.com`  
-[`package.json`](../package.json) `"homepage"`: `https://www.redantzmedia.com`
+Repo file [`public/CNAME`](../public/CNAME) contains: `redantzmedia.com`  
+[`package.json`](../package.json) `"homepage"`: `https://redantzmedia.com`
+
+### Why not `www` as the GitHub custom domain?
+
+If Pages custom domain is only `www.redantzmedia.com`, GitHub’s TLS cert often covers **www only**. Then `https://redantzmedia.com` shows **NET::ERR_CERT_COMMON_NAME_INVALID** (browser gets `*.github.io` cert). Setting the custom domain to the **apex** (`redantzmedia.com`) makes GitHub issue a cert for the apex (and usually www → apex redirect).
 
 ### Leave alone (email / GoDaddy)
 
@@ -76,9 +80,9 @@ Repo file [`public/CNAME`](../public/CNAME) contains: `www.redantzmedia.com`
 ### GitHub Pages settings
 
 - **Source:** GitHub Actions
-- **Custom domain:** `www.redantzmedia.com`
-- **Enforce HTTPS:** On
-- If DNS check shows red but dig/live site is correct, click **Check again** and wait (propagation / checker lag). Apex HTTPS may lag until GitHub issues a cert that includes the apex.
+- **Custom domain:** `redantzmedia.com` (apex)
+- **Enforce HTTPS:** On (may need to wait until the new certificate is **approved** for the apex)
+- After changing the custom domain, wait up to ~1 hour for a new cert. Click **Check again** if DNS still shows red. Until the cert lists `redantzmedia.com`, apex HTTPS can show `NET::ERR_CERT_COMMON_NAME_INVALID`.
 
 ### Migration note (historical)
 
